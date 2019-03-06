@@ -8,7 +8,7 @@ const PORT = 4000;
 let Todo = require('./todo.model');
 app.use(cors());
 app.use(bodyParser.json());
-mongoose.connect('mongodb://127.0.0.1:27017/todos', { useNewUrlParser: true });
+mongoose.connect('mongodb://admin:pass@testmerncluster-shard-00-00-eymo3.mongodb.net:27017,testmerncluster-shard-00-01-eymo3.mongodb.net:27017,testmerncluster-shard-00-02-eymo3.mongodb.net:27017/test?ssl=true&replicaSet=TestMERNCluster-shard-0&authSource=admin&retryWrites=true', { useNewUrlParser: true });
 const connection = mongoose.connection;
 connection.once('open', function() {
     console.log("MongoDB database connection established successfully");
