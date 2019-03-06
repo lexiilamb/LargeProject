@@ -1,1 +1,1 @@
-web: nodemon server 
+web: ./backend/server.js 
