@@ -5,6 +5,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const todoRoutes = express.Router();
 const PORT = process.env.PORT || 4000; // "process.env.PORT" is Heroku's port if we're deploying there, then 4000 is a custom chosen port for dev testing
+console.log("Port = " + PORT);
 let Todo = require('./todo.model');
 app.use(cors());
 app.use(bodyParser.json());
