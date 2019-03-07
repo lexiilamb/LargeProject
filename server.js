@@ -5,10 +5,11 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const todoRoutes = express.Router();
 const PORT = process.env.PORT || 4000; // "process.env.PORT" is Heroku's port if we're deploying there, then 4000 is a custom chosen port for dev testing
-//console.log("Port = " + PORT);
+const path = require("path")
 let Todo = require('./todo.model');
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, "client", "build")))
 mongoose.connect('mongodb://admin:pass@testmerncluster-shard-00-00-eymo3.mongodb.net:27017,testmerncluster-shard-00-01-eymo3.mongodb.net:27017,testmerncluster-shard-00-02-eymo3.mongodb.net:27017/test?ssl=true&replicaSet=TestMERNCluster-shard-0&authSource=admin&retryWrites=true', { useNewUrlParser: true });
 const connection = mongoose.connection;
 connection.once('open', function() {
@@ -57,6 +58,9 @@ todoRoutes.route('/add').post(function(req, res) {
         });
 });
 app.use('/todos', todoRoutes);
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);
 });
