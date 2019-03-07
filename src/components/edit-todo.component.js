@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+const PORT = process.env.PORT || 4000; // "process.env.PORT" is Heroku's port if we're deploying there, then 4000 is a custom chosen port for dev testing
+
 export default class EditTodo extends Component {
 
     constructor(props) {
@@ -21,7 +23,7 @@ export default class EditTodo extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/todos/'+this.props.match.params.id)
+        axios.get('http://localhost:' + PORT + '/todos/'+this.props.match.params.id)
             .then(response => {
                 this.setState({
                     todo_description: response.data.todo_description,
@@ -68,7 +70,7 @@ export default class EditTodo extends Component {
             todo_completed: this.state.todo_completed
         };
         console.log(obj);
-        axios.post('http://localhost:4000/todos/update/'+this.props.match.params.id, obj)
+        axios.post('http://localhost:' + PORT + '/todos/update/'+this.props.match.params.id, obj)
             .then(res => console.log(res.data));
         
         this.props.history.push('/');
