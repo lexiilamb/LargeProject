@@ -58,9 +58,9 @@ todoRoutes.route('/add').post(function(req, res) {
         });
 });
 app.use('/todos', todoRoutes);
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-});
+//app.get("*", (req, res) => {
+//    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+//});
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);
 });
