@@ -14,9 +14,10 @@ export default class CreateTodo extends Component {
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            todo_description: '',
-            todo_responsible: '',
-            todo_priority: '',
+            expenseDescription: '',
+            expenseAmount: '',
+            month: '',
+            year: '',
             todo_completed: false
         }
     }
