@@ -60,8 +60,8 @@ export default class CreateTodo extends Component {
         console.log(`Form submitted:`);
         console.log(`Description: ${this.state.description}`);
         console.log(`Amount: ${this.state.amount}`);
-		console.log(`Month: ${this.state.description}`);
-		console.log(`Year: ${this.state.description}`);
+		console.log(`Month: ${this.state.month}`);
+		console.log(`Year: ${this.state.year}`);
         console.log(`Todo Priority: ${this.state.todo_priority}`);
      
         const newTodo = {
