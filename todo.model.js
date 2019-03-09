@@ -8,7 +8,7 @@ let Todo = new Schema({
         type: Number
     },
 	month: {
-        type: Number
+        type: String
     },
 	year: {
         type: Number
