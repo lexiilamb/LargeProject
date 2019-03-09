@@ -2,16 +2,20 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 let expenseSchema = new Schema({
     description: {
-        type: String
+        type: String,
+		required: true
     },
     amount: {
-        type: Number
+        type: Number,
+		required: true
     },
 	month: {
-        type: String
+        type: String,
+		required: true
     },
 	year: {
-        type: Number
+        type: Number,
+		required: true
     },
     todo_priority: {
         type: String
