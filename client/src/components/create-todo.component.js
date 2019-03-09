@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const PORT = process.env.PORT || 4000; // "process.env.PORT" is Heroku's port if we're deploying there, then 4000 is a custom chosen port for dev testing
 
-export default class CreateExpense extends Component {
+export default class CreateTodo extends Component {
 
     constructor(props) {
         super(props);
@@ -64,7 +64,7 @@ export default class CreateExpense extends Component {
 		console.log(`Year: ${this.state.year}`);
         console.log(`Todo Priority: ${this.state.todo_priority}`);
      
-        const newExpense = {
+        const newTodo = {
             description: this.state.description,
             amount: this.state.amount,
             month: this.state.month,
@@ -72,7 +72,7 @@ export default class CreateExpense extends Component {
             todo_priority: this.state.todo_priority
         };
 
-        axios.post('/expenses/add', newExpense)
+        axios.post('/todos/add', newTodo)
             .then(res => console.log(res.data));
  
 		this.setState = {
@@ -159,7 +159,7 @@ export default class CreateExpense extends Component {
                     </div>
 
                     <div className="form-group">
-                        <input type="submit" value="Create Expense" className="btn btn-primary" />
+                        <input type="submit" value="Create Todo" className="btn btn-primary" />
                     </div>
                 </form>
             </div>

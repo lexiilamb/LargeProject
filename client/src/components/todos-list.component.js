@@ -4,42 +4,39 @@ import axios from 'axios';
 
 const PORT = process.env.PORT || 4000; // "process.env.PORT" is Heroku's port if we're deploying there, then 4000 is a custom chosen port for dev testing
 
-const Expense = props => (
+const Todo = props => (
     <tr>
-        <td className={props.expense.todo_completed ? 'completed' : ''}>{props.expense.description}</td>
-        <td className={props.expense.todo_completed ? 'completed' : ''}>{props.expense.amount}</td>
-        <td className={props.expense.todo_completed ? 'completed' : ''}>{props.expense.month}</td>
-        <td className={props.expense.todo_completed ? 'completed' : ''}>{props.expense.year}</td>
-        <td className={props.expense.todo_completed ? 'completed' : ''}>{props.expense.todo_priority}</td>
-        <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.todo_description}</td>
+        <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.description}</td>
         <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.amount}</td>
+        <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.month}</td>
+        <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.year}</td>
         <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.todo_priority}</td>
         <td>
-            <Link to={"/edit/"+props.expense._id}>Edit</Link>
+            <Link to={"/edit/"+props.todo._id}>Edit</Link>
         </td>
     </tr>
 )
 
-export default class ExpenseList extends Component {
+export default class TodosList extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {expenses: []};
+        this.state = {todos: []};
     }
 
     componentDidMount() {
-        axios.get('/expenses/')
+        axios.get('/todos/')
             .then(response => {
-                this.setState({ expenses: response.data });
+                this.setState({ todos: response.data });
             })
             .catch(function (error){
                 console.log(error);
             })
     }
 
-    expenseList() {
-        return this.state.expenses.map(function(currentExpense, i){
-            return <Expense expense={currentExpense} key={i} />;
+    todoList() {
+        return this.state.todos.map(function(currentTodo, i){
+            return <Todo todo={currentTodo} key={i} />;
         })
     }
 
@@ -59,7 +56,7 @@ export default class ExpenseList extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        { this.expenseList() }
+                        { this.todoList() }
                     </tbody>
                 </table>
             </div>

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const PORT = process.env.PORT || 4000; // "process.env.PORT" is Heroku's port if we're deploying there, then 4000 is a custom chosen port for dev testing
 
-export default class EditExpense extends Component {
+export default class EditTodo extends Component {
 
     constructor(props) {
         super(props);
@@ -26,7 +26,7 @@ export default class EditExpense extends Component {
     }
 
     componentDidMount() {
-        axios.get('/expenses/'+this.props.match.params.id)
+        axios.get('/todos/'+this.props.match.params.id)
             .then(response => {
                 this.setState({
                     description: response.data.description,
@@ -89,7 +89,7 @@ export default class EditExpense extends Component {
             todo_completed: this.state.todo_completed
         };
         console.log(obj);
-        axios.post('/expenses/update/'+this.props.match.params.id, obj)
+        axios.post('/todos/update/'+this.props.match.params.id, obj)
             .then(res => console.log(res.data));
         
         this.props.history.push('/');
@@ -98,13 +98,13 @@ export default class EditExpense extends Component {
     render() {
         return (
             <div>
-                <h3 align="center">Update Expense</h3>
+                <h3 align="center">Update Todo</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group"> 
                         <label>Description: </label>
                         <input  type="text"
                                 className="form-control"
-                                value={this.state.description}
+                                value={this.state.todo_description}
                                 onChange={this.onChangeDescription}
                                 />
                     </div>
@@ -185,7 +185,7 @@ export default class EditExpense extends Component {
                     <br />
 
                     <div className="form-group">
-                        <input type="submit" value="Update Expense" className="btn btn-primary" />
+                        <input type="submit" value="Update Todo" className="btn btn-primary" />
                     </div>
                 </form>
             </div>

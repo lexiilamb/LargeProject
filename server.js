@@ -3,11 +3,11 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const expenseRoutes = express.Router();
+const todoRoutes = express.Router();
 const PORT = process.env.PORT || 4000; // "process.env.PORT" is Heroku's port if we're deploying there, then 4000 is a custom chosen port for dev testing
 const path = require("path");
 const dotenv = require("dotenv").config();
-let Expense = require('./expense');
+let Todo = require('./todo.model');
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "client", "build")))
@@ -16,51 +16,51 @@ const connection = mongoose.connection;
 connection.once('open', function() {
     console.log("MongoDB database connection established successfully");
 })
-expenseRoutes.route('/').get(function(req, res) {
-    Expense.find(function(err, expenses) {
+todoRoutes.route('/').get(function(req, res) {
+    Todo.find(function(err, todos) {
         if (err) {
             console.log(err);
         } else {
-            res.json(expenses);
+            res.json(todos);
         }
     });
 });
-expenseRoutes.route('/:id').get(function(req, res) {
+todoRoutes.route('/:id').get(function(req, res) {
     let id = req.params.id;
-    Expense.findById(id, function(err, expense) {
-        res.json(expense);
+    Todo.findById(id, function(err, todo) {
+        res.json(todo);
     });
 });
-expenseRoutes.route('/update/:id').post(function(req, res) {
-    Expense.findById(req.params.id, function(err, expense) {
-        if (!expense)
+todoRoutes.route('/update/:id').post(function(req, res) {
+    Todo.findById(req.params.id, function(err, todo) {
+        if (!todo)
             res.status(404).send("data is not found");
         else
-            expense.description = req.body.description;
-            expense.amount = req.body.amount;
-            expense.month = req.body.month;
-            expense.year = req.body.year;
-            expense.todo_priority = req.body.todo_priority;
-            expense.todo_completed = req.body.todo_completed;
-            expense.save().then(expense => {
-                res.json('Expense updated!');
+            todo.description = req.body.description;
+            todo.amount = req.body.amount;
+            todo.month = req.body.month;
+            todo.year = req.body.year;
+            todo.todo_priority = req.body.todo_priority;
+            todo.todo_completed = req.body.todo_completed;
+            todo.save().then(todo => {
+                res.json('Todo updated!');
             })
             .catch(err => {
                 res.status(400).send("Update not possible");
             });
     });
 });
-expenseRoutes.route('/add').post(function(req, res) {
-    let expense = new Expense(req.body);
-    expense.save()
-        .then(expense => {
-            res.status(200).json({'expense': 'expense added successfully'});
+todoRoutes.route('/add').post(function(req, res) {
+    let todo = new Todo(req.body);
+    todo.save()
+        .then(todo => {
+            res.status(200).json({'todo': 'todo added successfully'});
         })
         .catch(err => {
-            res.status(400).send('adding new expense failed');
+            res.status(400).send('adding new todo failed');
         });
 });
-app.use('/expenses', expenseRoutes);
+app.use('/todos', todoRoutes);
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
