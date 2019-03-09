@@ -7,7 +7,7 @@ const todoRoutes = express.Router();
 const PORT = process.env.PORT || 4000; // "process.env.PORT" is Heroku's port if we're deploying there, then 4000 is a custom chosen port for dev testing
 const path = require("path");
 const dotenv = require("dotenv").config();
-let Todo = require('./todo.model');
+let Expense = require('./expense');
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "client", "build")))
@@ -17,7 +17,7 @@ connection.once('open', function() {
     console.log("MongoDB database connection established successfully");
 })
 todoRoutes.route('/').get(function(req, res) {
-    Todo.find(function(err, todos) {
+    Expense.find(function(err, todos) {
         if (err) {
             console.log(err);
         } else {
@@ -27,12 +27,12 @@ todoRoutes.route('/').get(function(req, res) {
 });
 todoRoutes.route('/:id').get(function(req, res) {
     let id = req.params.id;
-    Todo.findById(id, function(err, todo) {
+    Expense.findById(id, function(err, todo) {
         res.json(todo);
     });
 });
 todoRoutes.route('/update/:id').post(function(req, res) {
-    Todo.findById(req.params.id, function(err, todo) {
+    Expense.findById(req.params.id, function(err, todo) {
         if (!todo)
             res.status(404).send("data is not found");
         else
@@ -43,7 +43,7 @@ todoRoutes.route('/update/:id').post(function(req, res) {
             todo.todo_priority = req.body.todo_priority;
             todo.todo_completed = req.body.todo_completed;
             todo.save().then(todo => {
-                res.json('Todo updated!');
+                res.json('Expense updated!');
             })
             .catch(err => {
                 res.status(400).send("Update not possible");
@@ -51,7 +51,7 @@ todoRoutes.route('/update/:id').post(function(req, res) {
     });
 });
 todoRoutes.route('/add').post(function(req, res) {
-    let todo = new Todo(req.body);
+    let todo = new Expense(req.body);
     todo.save()
         .then(todo => {
             res.status(200).json({'todo': 'todo added successfully'});
