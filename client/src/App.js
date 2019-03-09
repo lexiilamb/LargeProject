@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import CreateExpense from "./components/create-todo.component";
-import EditExpense from "./components/edit-todo.component";
-import ExpensesList from "./components/todos-list.component";
+import CreateExpense from "./components/createExpense";
+import EditExpense from "./components/editExpense";
+import ExpensesList from "./components/expenseList";
 
 import logo from "./logo.png";
 

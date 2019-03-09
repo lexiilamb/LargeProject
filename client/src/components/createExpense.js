@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const PORT = process.env.PORT || 4000; // "process.env.PORT" is Heroku's port if we're deploying there, then 4000 is a custom chosen port for dev testing
 
-export default class EditTodo extends Component {
+export default class CreateTodo extends Component {
 
     constructor(props) {
         super(props);
@@ -13,7 +13,6 @@ export default class EditTodo extends Component {
 		this.onChangeMonth = this.onChangeMonth.bind(this);
 		this.onChangeYear = this.onChangeYear.bind(this);
         this.onChangeTodoPriority = this.onChangeTodoPriority.bind(this);
-		this.onChangeTodoCompleted = this.onChangeTodoCompleted.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
@@ -23,23 +22,6 @@ export default class EditTodo extends Component {
             year: '',
             todo_priority: ''
         }
-    }
-
-    componentDidMount() {
-        axios.get('/todos/'+this.props.match.params.id)
-            .then(response => {
-                this.setState({
-                    description: response.data.description,
-                    amount: response.data.amount,
-					month: response.data.month,
-					year: response.data.year,
-                    todo_priority: response.data.todo_priority,
-                    todo_completed: response.data.todo_completed
-                })   
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
     }
 
     onChangeDescription(e) {
@@ -72,39 +54,46 @@ export default class EditTodo extends Component {
         });
     }
 
-    onChangeTodoCompleted(e) {
-        this.setState({
-            todo_completed: !this.state.todo_completed
-        });
-    }
-
     onSubmit(e) {
         e.preventDefault();
-        const obj = {
+        
+        console.log(`Form submitted:`);
+        console.log(`Description: ${this.state.description}`);
+        console.log(`Amount: ${this.state.amount}`);
+		console.log(`Month: ${this.state.month}`);
+		console.log(`Year: ${this.state.year}`);
+        console.log(`Todo Priority: ${this.state.todo_priority}`);
+     
+        const newTodo = {
             description: this.state.description,
             amount: this.state.amount,
             month: this.state.month,
             year: this.state.year,
-            todo_priority: this.state.todo_priority,
-            todo_completed: this.state.todo_completed
+            todo_priority: this.state.todo_priority
         };
-        console.log(obj);
-        axios.post('/todos/update/'+this.props.match.params.id, obj)
+
+        axios.post('/expenses/add', newTodo)
             .then(res => console.log(res.data));
-        
-        this.props.history.push('/');
+ 
+		this.setState = {
+            description: '',
+            amount: '',
+            month: '',
+            year: '',
+            todo_priority: ''
+        }
     }
 
     render() {
         return (
-            <div>
-                <h3 align="center">Update Todo</h3>
+            <div style={{marginTop: 10}}>
+                <h3>Create New Expense</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group"> 
                         <label>Description: </label>
                         <input  type="text"
                                 className="form-control"
-                                value={this.state.todo_description}
+                                value={this.state.description}
                                 onChange={this.onChangeDescription}
                                 />
                     </div>
@@ -168,24 +157,9 @@ export default class EditTodo extends Component {
                             <label className="form-check-label">High</label>
                         </div>
                     </div>
-                    <div className="form-check">
-                        <input  className="form-check-input"
-                                id="completedCheckbox"
-                                type="checkbox"
-                                name="completedCheckbox"
-                                onChange={this.onChangeTodoCompleted}
-                                checked={this.state.todo_completed}
-                                value={this.state.todo_completed}
-                                />
-                        <label className="form-check-label" htmlFor="completedCheckbox">
-                            Completed
-                        </label>                        
-                    </div>
-
-                    <br />
 
                     <div className="form-group">
-                        <input type="submit" value="Update Todo" className="btn btn-primary" />
+                        <input type="submit" value="Create Todo" className="btn btn-primary" />
                     </div>
                 </form>
             </div>
