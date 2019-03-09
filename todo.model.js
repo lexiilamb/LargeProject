@@ -4,8 +4,8 @@ let Todo = new Schema({
     todo_description: {
         type: String
     },
-    todo_responsible: {
-        type: String
+    amount: {
+        type: Number
     },
     todo_priority: {
         type: String

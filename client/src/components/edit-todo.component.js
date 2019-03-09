@@ -9,14 +9,14 @@ export default class EditTodo extends Component {
         super(props);
 
         this.onChangeTodoDescription = this.onChangeTodoDescription.bind(this);
-        this.onChangeTodoResponsible = this.onChangeTodoResponsible.bind(this);
+        this.onChangeAmount = this.onChangeAmount.bind(this);
         this.onChangeTodoPriority = this.onChangeTodoPriority.bind(this);
         this.onChangeTodoCompleted = this.onChangeTodoCompleted.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
             todo_description: '',
-            todo_responsible: '',
+            amount: '',
             todo_priority: '',
             todo_completed: false
         }
@@ -27,7 +27,7 @@ export default class EditTodo extends Component {
             .then(response => {
                 this.setState({
                     todo_description: response.data.todo_description,
-                    todo_responsible: response.data.todo_responsible,
+                    amount: response.data.amount,
                     todo_priority: response.data.todo_priority,
                     todo_completed: response.data.todo_completed
                 })   
@@ -43,9 +43,9 @@ export default class EditTodo extends Component {
         });
     }
 
-    onChangeTodoResponsible(e) {
+    onChangeAmount(e) {
         this.setState({
-            todo_responsible: e.target.value
+            amount: e.target.value
         });
     }
 
@@ -65,7 +65,7 @@ export default class EditTodo extends Component {
         e.preventDefault();
         const obj = {
             todo_description: this.state.todo_description,
-            todo_responsible: this.state.todo_responsible,
+            amount: this.state.amount,
             todo_priority: this.state.todo_priority,
             todo_completed: this.state.todo_completed
         };
@@ -90,12 +90,12 @@ export default class EditTodo extends Component {
                                 />
                     </div>
                     <div className="form-group">
-                        <label>Responsible: </label>
+                        <label>Amount: </label>
                         <input 
                                 type="text" 
                                 className="form-control"
-                                value={this.state.todo_responsible}
-                                onChange={this.onChangeTodoResponsible}
+                                value={this.state.amount}
+                                onChange={this.onChangeAmount}
                                 />
                     </div>
                     <div className="form-group">

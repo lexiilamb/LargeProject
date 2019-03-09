@@ -9,15 +9,14 @@ export default class CreateTodo extends Component {
         super(props);
 
         this.onChangeTodoDescription = this.onChangeTodoDescription.bind(this);
-        this.onChangeTodoResponsible = this.onChangeTodoResponsible.bind(this);
+        this.onChangeAmount = this.onChangeAmount.bind(this);
         this.onChangeTodoPriority = this.onChangeTodoPriority.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            expenseDescription: '',
-            expenseAmount: '',
-            month: '',
-            year: '',
+            todo_description: '',
+            amount: '',
+            todo_priority: '',
             todo_completed: false
         }
     }
@@ -28,9 +27,9 @@ export default class CreateTodo extends Component {
         });
     }
 
-    onChangeTodoResponsible(e) {
+    onChangeAmount(e) {
         this.setState({
-            todo_responsible: e.target.value
+            amount: e.target.value
         });
     }
 
@@ -45,12 +44,12 @@ export default class CreateTodo extends Component {
         
         console.log(`Form submitted:`);
         console.log(`Todo Description: ${this.state.todo_description}`);
-        console.log(`Todo Responsible: ${this.state.todo_responsible}`);
+        console.log(`Amount: ${this.state.amount}`);
         console.log(`Todo Priority: ${this.state.todo_priority}`);
      
         const newTodo = {
             todo_description: this.state.todo_description,
-            todo_responsible: this.state.todo_responsible,
+            amount: this.state.amount,
             todo_priority: this.state.todo_priority,
             todo_completed: this.state.todo_completed
         };
@@ -60,7 +59,7 @@ export default class CreateTodo extends Component {
 
         this.setState({
             todo_description: '',
-            todo_responsible: '',
+            amount: '',
             todo_priority: '',
             todo_completed: false
         })
@@ -80,12 +79,12 @@ export default class CreateTodo extends Component {
                                 />
                     </div>
                     <div className="form-group">
-                        <label>Responsible: </label>
+                        <label>Amount: </label>
                         <input 
                                 type="text" 
                                 className="form-control"
-                                value={this.state.todo_responsible}
-                                onChange={this.onChangeTodoResponsible}
+                                value={this.state.amount}
+                                onChange={this.onChangeAmount}
                                 />
                     </div>
                     <div className="form-group">

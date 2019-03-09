@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 4000; // "process.env.PORT" is Heroku's port if
 const Todo = props => (
     <tr>
         <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.todo_description}</td>
-        <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.todo_responsible}</td>
+        <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.amount}</td>
         <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.todo_priority}</td>
         <td>
             <Link to={"/edit/"+props.todo._id}>Edit</Link>
@@ -46,7 +46,7 @@ export default class TodosList extends Component {
                     <thead>
                         <tr>
                             <th>Description</th>
-                            <th>Responsible</th>
+                            <th>Amount</th>
                             <th>Priority</th>
                             <th>Action</th>
                         </tr>
