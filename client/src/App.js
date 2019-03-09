@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import CreateTodo from "./components/create-todo.component";
-import EditTodo from "./components/edit-todo.component";
-import TodosList from "./components/todos-list.component";
+import CreateExpense from "./components/create-todo.component";
+import EditExpense from "./components/edit-todo.component";
+import ExpensesList from "./components/todos-list.component";
 
 import logo from "./logo.png";
 
@@ -31,9 +31,9 @@ class App extends Component {
             </div>
           </nav>
           <br/>
-          <Route path="/" exact component={TodosList} />
-          <Route path="/edit/:id" component={EditTodo} />
-          <Route path="/create" component={CreateTodo} />
+          <Route path="/" exact component={ExpensesList} />
+          <Route path="/edit/:id" component={EditExpense} />
+          <Route path="/create" component={CreateExpense} />
         </div>
       </Router>
     );
