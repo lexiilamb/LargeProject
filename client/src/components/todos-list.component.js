@@ -11,6 +11,9 @@ const Expense = props => (
         <td className={props.expense.todo_completed ? 'completed' : ''}>{props.expense.month}</td>
         <td className={props.expense.todo_completed ? 'completed' : ''}>{props.expense.year}</td>
         <td className={props.expense.todo_completed ? 'completed' : ''}>{props.expense.todo_priority}</td>
+        <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.todo_description}</td>
+        <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.amount}</td>
+        <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.todo_priority}</td>
         <td>
             <Link to={"/edit/"+props.expense._id}>Edit</Link>
         </td>
