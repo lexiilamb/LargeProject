@@ -8,17 +8,20 @@ export default class EditTodo extends Component {
     constructor(props) {
         super(props);
 
-        this.onChangeTodoDescription = this.onChangeTodoDescription.bind(this);
+        this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeAmount = this.onChangeAmount.bind(this);
+		this.onChangeMonth = this.onChangeMonth.bind(this);
+		this.onChangeYear = this.onChangeYear.bind(this);
         this.onChangeTodoPriority = this.onChangeTodoPriority.bind(this);
-        this.onChangeTodoCompleted = this.onChangeTodoCompleted.bind(this);
+		this.onChangeTodoCompleted = this.onChangeTodoCompleted.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            todo_description: '',
+            description: '',
             amount: '',
-            todo_priority: '',
-            todo_completed: false
+            month: '',
+            year: '',
+            todo_priority: ''
         }
     }
 
@@ -26,8 +29,10 @@ export default class EditTodo extends Component {
         axios.get('/todos/'+this.props.match.params.id)
             .then(response => {
                 this.setState({
-                    todo_description: response.data.todo_description,
+                    description: response.data.description,
                     amount: response.data.amount,
+					month: response.data.month,
+					year: response.data.year,
                     todo_priority: response.data.todo_priority,
                     todo_completed: response.data.todo_completed
                 })   
@@ -37,15 +42,27 @@ export default class EditTodo extends Component {
             })
     }
 
-    onChangeTodoDescription(e) {
+    onChangeDescription(e) {
         this.setState({
-            todo_description: e.target.value
+            description: e.target.value
         });
     }
 
     onChangeAmount(e) {
         this.setState({
             amount: e.target.value
+        });
+    }
+	
+	onChangeMonth(e) {
+        this.setState({
+            month: e.target.value
+        });
+    }
+	
+	onChangeYear(e) {
+        this.setState({
+            year: e.target.value
         });
     }
 
@@ -64,8 +81,10 @@ export default class EditTodo extends Component {
     onSubmit(e) {
         e.preventDefault();
         const obj = {
-            todo_description: this.state.todo_description,
+            description: this.state.description,
             amount: this.state.amount,
+            month: this.state.month,
+            year: this.state.year,
             todo_priority: this.state.todo_priority,
             todo_completed: this.state.todo_completed
         };
@@ -86,7 +105,7 @@ export default class EditTodo extends Component {
                         <input  type="text"
                                 className="form-control"
                                 value={this.state.todo_description}
-                                onChange={this.onChangeTodoDescription}
+                                onChange={this.onChangeDescription}
                                 />
                     </div>
                     <div className="form-group">
@@ -96,6 +115,22 @@ export default class EditTodo extends Component {
                                 className="form-control"
                                 value={this.state.amount}
                                 onChange={this.onChangeAmount}
+                                />
+                    </div>
+					<div className="form-group"> 
+                        <label>Month: </label>
+                        <input  type="text"
+                                className="form-control"
+                                value={this.state.month}
+                                onChange={this.onChangeMonth}
+                                />
+                    </div>
+					<div className="form-group"> 
+                        <label>Year: </label>
+                        <input  type="text"
+                                className="form-control"
+                                value={this.state.year}
+                                onChange={this.onChangeYear}
                                 />
                     </div>
                     <div className="form-group">

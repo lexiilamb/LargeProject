@@ -8,28 +8,43 @@ export default class CreateTodo extends Component {
     constructor(props) {
         super(props);
 
-        this.onChangeTodoDescription = this.onChangeTodoDescription.bind(this);
+        this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeAmount = this.onChangeAmount.bind(this);
+		this.onChangeMonth = this.onChangeMonth.bind(this);
+		this.onChangeYear = this.onChangeYear.bind(this);
         this.onChangeTodoPriority = this.onChangeTodoPriority.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            todo_description: '',
+            description: '',
             amount: '',
-            todo_priority: '',
-            todo_completed: false
+            month: '',
+            year: '',
+            todo_priority: ''
         }
     }
 
-    onChangeTodoDescription(e) {
+    onChangeDescription(e) {
         this.setState({
-            todo_description: e.target.value
+            description: e.target.value
         });
     }
 
     onChangeAmount(e) {
         this.setState({
             amount: e.target.value
+        });
+    }
+	
+	onChangeMonth(e) {
+        this.setState({
+            month: e.target.value
+        });
+    }
+	
+	onChangeYear(e) {
+        this.setState({
+            year: e.target.value
         });
     }
 
@@ -43,39 +58,43 @@ export default class CreateTodo extends Component {
         e.preventDefault();
         
         console.log(`Form submitted:`);
-        console.log(`Todo Description: ${this.state.todo_description}`);
+        console.log(`Description: ${this.state.description}`);
         console.log(`Amount: ${this.state.amount}`);
+		console.log(`Month: ${this.state.description}`);
+		console.log(`Year: ${this.state.description}`);
         console.log(`Todo Priority: ${this.state.todo_priority}`);
      
         const newTodo = {
-            todo_description: this.state.todo_description,
+            description: this.state.description,
             amount: this.state.amount,
-            todo_priority: this.state.todo_priority,
-            todo_completed: this.state.todo_completed
+            month: this.state.month,
+            year: this.state.year,
+            todo_priority: this.state.todo_priority
         };
 
         axios.post('/todos/add', newTodo)
             .then(res => console.log(res.data));
-
-        this.setState({
-            todo_description: '',
+ 
+		this.setState = {
+            description: '',
             amount: '',
-            todo_priority: '',
-            todo_completed: false
-        })
+            month: '',
+            year: '',
+            todo_priority: ''
+        }
     }
 
     render() {
         return (
             <div style={{marginTop: 10}}>
-                <h3>Create New Todo</h3>
+                <h3>Create New Expense</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group"> 
                         <label>Description: </label>
                         <input  type="text"
                                 className="form-control"
-                                value={this.state.todo_description}
-                                onChange={this.onChangeTodoDescription}
+                                value={this.state.description}
+                                onChange={this.onChangeDescription}
                                 />
                     </div>
                     <div className="form-group">
@@ -85,6 +104,22 @@ export default class CreateTodo extends Component {
                                 className="form-control"
                                 value={this.state.amount}
                                 onChange={this.onChangeAmount}
+                                />
+                    </div>
+					<div className="form-group"> 
+                        <label>Month: </label>
+                        <input  type="text"
+                                className="form-control"
+                                value={this.state.month}
+                                onChange={this.onChangeMonth}
+                                />
+                    </div>
+					<div className="form-group"> 
+                        <label>Year: </label>
+                        <input  type="text"
+                                className="form-control"
+                                value={this.state.year}
+                                onChange={this.onChangeYear}
                                 />
                     </div>
                     <div className="form-group">

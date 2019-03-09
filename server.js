@@ -36,8 +36,10 @@ todoRoutes.route('/update/:id').post(function(req, res) {
         if (!todo)
             res.status(404).send("data is not found");
         else
-            todo.todo_description = req.body.todo_description;
+            todo.description = req.body.description;
             todo.amount = req.body.amount;
+            todo.month = req.body.month;
+            todo.year = req.body.year;
             todo.todo_priority = req.body.todo_priority;
             todo.todo_completed = req.body.todo_completed;
             todo.save().then(todo => {

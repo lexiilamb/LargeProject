@@ -7,6 +7,12 @@ let Todo = new Schema({
     amount: {
         type: Number
     },
+	month: {
+        type: Number
+    },
+	year: {
+        type: Number
+    },
     todo_priority: {
         type: String
     },
