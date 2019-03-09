@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const PORT = process.env.PORT || 4000; // "process.env.PORT" is Heroku's port if we're deploying there, then 4000 is a custom chosen port for dev testing
 
-const Todo = props => (
+const Expense = props => (
     <tr>
         <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.description}</td>
         <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.amount}</td>
@@ -36,7 +36,7 @@ export default class TodosList extends Component {
 
     todoList() {
         return this.state.todos.map(function(currentTodo, i){
-            return <Todo todo={currentTodo} key={i} />;
+            return <Expense todo={currentTodo} key={i} />;
         })
     }
 

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const PORT = process.env.PORT || 4000; // "process.env.PORT" is Heroku's port if we're deploying there, then 4000 is a custom chosen port for dev testing
 
-export default class EditTodo extends Component {
+export default class EditExpense extends Component {
 
     constructor(props) {
         super(props);
@@ -98,13 +98,13 @@ export default class EditTodo extends Component {
     render() {
         return (
             <div>
-                <h3 align="center">Update Todo</h3>
+                <h3 align="center">Update Expense</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group"> 
                         <label>Description: </label>
                         <input  type="text"
                                 className="form-control"
-                                value={this.state.todo_description}
+                                value={this.state.description}
                                 onChange={this.onChangeDescription}
                                 />
                     </div>
@@ -185,7 +185,7 @@ export default class EditTodo extends Component {
                     <br />
 
                     <div className="form-group">
-                        <input type="submit" value="Update Todo" className="btn btn-primary" />
+                        <input type="submit" value="Update Expense" className="btn btn-primary" />
                     </div>
                 </form>
             </div>
