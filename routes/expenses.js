@@ -11,8 +11,8 @@ router.post('/addExpense', (req, res, next) => {
   const expense = new Expense({
     userId: req.body.userId,
     _id: new mongoose.Types.ObjectId(), 
-	expenseDescription: req.body.expenseDescription,
-	expenseAmount: req.body.expenseAmount,
+	description: req.body.description,
+	amount: req.body.amount,
 	month: req.body.month,
 	day: req.body.day,
 	year: req.body.year,
@@ -39,11 +39,11 @@ router.post('/getExpense', (req, res, next) => {
   const userId = req.body.userId;
   
   Expense.findById({_id: id, userId: userId})
-  .select('expenseDescription expenseAmount month day year userId').exec().then(doc => {
+  .select('description amount month day year userId').exec().then(doc => {
 	if (doc.userId == userId){
 	  res.status(200).json({
-	    expenseDescription: doc.expenseDescription,
-	    expenseAmount: doc.expenseAmount,
+	    description: doc.description,
+	    amount: doc.amount,
 	    month: doc.month,
 	    day: doc.day,
 	    year: doc.year,
@@ -86,10 +86,9 @@ router.post('/deleteExpense', (req, res, next) => {
 
 // Route to return ALL expenses in the database.
 router.post("/getAllExpenses", (req, res, next) => {
-  const id = req.body.expenseId;
-  const userId = req.body.userId;
+  const userId = 5c85369a9818a709dcdf0ab7;
   Expense.find({userId: userId})
-		.select("_id userId expenseDescription expenseAmount month day year")
+		.select("_id userId description amount month day year")
 		.exec()
 		.then(docs => {
     const response = {
@@ -97,8 +96,8 @@ router.post("/getAllExpenses", (req, res, next) => {
 	  total: docs.length,
 	  expenses: docs.map(doc => {
 	    return {
-		  expenseDescription: doc.expenseDescription,
-		  expenseAmount: doc.expenseAmount,
+		  description: doc.description,
+		  amount: doc.amount,
 		  month: doc.month,
 		  day: doc.day,
 		  year: doc.year,
@@ -120,7 +119,7 @@ router.post("/getMonth", (req, res, next) => {
   const month = req.body.month;
   const userId = req.body.userId;
   Expense.find({userId: userId, month: month})
-  .select("_id userId expenseDescription month year")
+  .select("_id userId description month year")
   .exec()
   .then(docs => {
     const response = {
@@ -128,8 +127,8 @@ router.post("/getMonth", (req, res, next) => {
 	  total: docs.length,
 	  expenses: docs.map(doc => {
 	    return {
-		  expenseDescription: doc.expenseDescription,
-		  expenseAmount: doc.expenseAmount,
+		  description: doc.description,
+		  amount: doc.amount,
 		  month: doc.month,
 		  day: doc.day,
 		  year: doc.year,

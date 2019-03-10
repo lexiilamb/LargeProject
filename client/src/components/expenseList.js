@@ -20,13 +20,13 @@ export default class TodosList extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {todos: []};
+        this.state = {allExpenses: []};
     }
 
     componentDidMount() {
-        axios.get('/expenses/')
+        axios.get('/expenses/getAllExpenses')
             .then(response => {
-                this.setState({ todos: response.data });
+                this.setState({ allExpenses: response.data });
             })
             .catch(function (error){
                 console.log(error);
@@ -34,7 +34,7 @@ export default class TodosList extends Component {
     }
 
     todoList() {
-        return this.state.todos.map(function(currentExpense, i){
+        return this.state.allExpenses.map(function(currentExpense, i){
             return <Expense item={currentExpense} key={i} />;
         })
     }
