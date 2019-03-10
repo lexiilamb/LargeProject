@@ -12,16 +12,13 @@ export default class EditExpense extends Component {
         this.onChangeAmount = this.onChangeAmount.bind(this);
 		this.onChangeMonth = this.onChangeMonth.bind(this);
 		this.onChangeYear = this.onChangeYear.bind(this);
-        this.onChangeTodoPriority = this.onChangeTodoPriority.bind(this);
-		this.onChangeTodoCompleted = this.onChangeTodoCompleted.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
             description: '',
             amount: '',
             month: '',
-            year: '',
-            todo_priority: ''
+            year: ''
         }
     }
 
@@ -32,9 +29,7 @@ export default class EditExpense extends Component {
                     description: response.data.description,
                     amount: response.data.amount,
 					month: response.data.month,
-					year: response.data.year,
-                    todo_priority: response.data.todo_priority,
-                    todo_completed: response.data.todo_completed
+					year: response.data.year
                 })   
             })
             .catch(function (error) {
@@ -66,27 +61,13 @@ export default class EditExpense extends Component {
         });
     }
 
-    onChangeTodoPriority(e) {
-        this.setState({
-            todo_priority: e.target.value
-        });
-    }
-
-    onChangeTodoCompleted(e) {
-        this.setState({
-            todo_completed: !this.state.todo_completed
-        });
-    }
-
     onSubmit(e) {
         e.preventDefault();
         const obj = {
             description: this.state.description,
             amount: this.state.amount,
             month: this.state.month,
-            year: this.state.year,
-            todo_priority: this.state.todo_priority,
-            todo_completed: this.state.todo_completed
+            year: this.state.year
         };
         console.log(obj);
         axios.post('/expenses/update/'+this.props.match.params.id, obj)
@@ -133,55 +114,7 @@ export default class EditExpense extends Component {
                                 onChange={this.onChangeYear}
                                 />
                     </div>
-                    <div className="form-group">
-                        <div className="form-check form-check-inline">
-                            <input  className="form-check-input" 
-                                    type="radio" 
-                                    name="priorityOptions" 
-                                    id="priorityLow" 
-                                    value="Low"
-                                    checked={this.state.todo_priority==='Low'} 
-                                    onChange={this.onChangeTodoPriority}
-                                    />
-                            <label className="form-check-label">Low</label>
-                        </div>
-                        <div className="form-check form-check-inline">
-                            <input  className="form-check-input" 
-                                    type="radio" 
-                                    name="priorityOptions" 
-                                    id="priorityMedium" 
-                                    value="Medium" 
-                                    checked={this.state.todo_priority==='Medium'} 
-                                    onChange={this.onChangeTodoPriority}
-                                    />
-                            <label className="form-check-label">Medium</label>
-                        </div>
-                        <div className="form-check form-check-inline">
-                            <input  className="form-check-input" 
-                                    type="radio" 
-                                    name="priorityOptions" 
-                                    id="priorityHigh" 
-                                    value="High" 
-                                    checked={this.state.todo_priority==='High'} 
-                                    onChange={this.onChangeTodoPriority}
-                                    />
-                            <label className="form-check-label">High</label>
-                        </div>
-                    </div>
-                    <div className="form-check">
-                        <input  className="form-check-input"
-                                id="completedCheckbox"
-                                type="checkbox"
-                                name="completedCheckbox"
-                                onChange={this.onChangeTodoCompleted}
-                                checked={this.state.todo_completed}
-                                value={this.state.todo_completed}
-                                />
-                        <label className="form-check-label" htmlFor="completedCheckbox">
-                            Completed
-                        </label>                        
-                    </div>
-
+              
                     <br />
 
                     <div className="form-group">

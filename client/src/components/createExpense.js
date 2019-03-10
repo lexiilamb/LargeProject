@@ -12,15 +12,13 @@ export default class CreateExpense extends Component {
         this.onChangeAmount = this.onChangeAmount.bind(this);
 		this.onChangeMonth = this.onChangeMonth.bind(this);
 		this.onChangeYear = this.onChangeYear.bind(this);
-        this.onChangeTodoPriority = this.onChangeTodoPriority.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
             description: '',
             amount: '',
             month: '',
-            year: '',
-            todo_priority: ''
+            year: ''
         }
     }
 
@@ -48,12 +46,6 @@ export default class CreateExpense extends Component {
         });
     }
 
-    onChangeTodoPriority(e) {
-        this.setState({
-            todo_priority: e.target.value
-        });
-    }
-
     onSubmit(e) {
         e.preventDefault();
         
@@ -62,14 +54,12 @@ export default class CreateExpense extends Component {
         console.log(`Amount: ${this.state.amount}`);
 		console.log(`Month: ${this.state.month}`);
 		console.log(`Year: ${this.state.year}`);
-        console.log(`Expense Priority: ${this.state.todo_priority}`);
      
         const newExpense = {
             description: this.state.description,
             amount: this.state.amount,
             month: this.state.month,
             year: this.state.year,
-            todo_priority: this.state.todo_priority
         };
 
         axios.post('/expenses/add', newExpense)
@@ -79,8 +69,7 @@ export default class CreateExpense extends Component {
             description: '',
             amount: '',
             month: '',
-            year: '',
-            todo_priority: ''
+            year: ''
         }
     }
 
@@ -121,42 +110,7 @@ export default class CreateExpense extends Component {
                                 value={this.state.year}
                                 onChange={this.onChangeYear}
                                 />
-                    </div>
-                    <div className="form-group">
-                        <div className="form-check form-check-inline">
-                            <input  className="form-check-input" 
-                                    type="radio" 
-                                    name="priorityOptions" 
-                                    id="priorityLow" 
-                                    value="Low"
-                                    checked={this.state.todo_priority==='Low'} 
-                                    onChange={this.onChangeTodoPriority}
-                                    />
-                            <label className="form-check-label">Low</label>
-                        </div>
-                        <div className="form-check form-check-inline">
-                            <input  className="form-check-input" 
-                                    type="radio" 
-                                    name="priorityOptions" 
-                                    id="priorityMedium" 
-                                    value="Medium" 
-                                    checked={this.state.todo_priority==='Medium'} 
-                                    onChange={this.onChangeTodoPriority}
-                                    />
-                            <label className="form-check-label">Medium</label>
-                        </div>
-                        <div className="form-check form-check-inline">
-                            <input  className="form-check-input" 
-                                    type="radio" 
-                                    name="priorityOptions" 
-                                    id="priorityHigh" 
-                                    value="High" 
-                                    checked={this.state.todo_priority==='High'} 
-                                    onChange={this.onChangeTodoPriority}
-                                    />
-                            <label className="form-check-label">High</label>
-                        </div>
-                    </div>
+                    </div>     
 
                     <div className="form-group">
                         <input type="submit" value="Create Expense" className="btn btn-success" />

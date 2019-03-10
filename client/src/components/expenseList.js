@@ -6,11 +6,10 @@ const PORT = process.env.PORT || 4000; // "process.env.PORT" is Heroku's port if
 
 const Expense = props => (
     <tr>
-        <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.description}</td>
-        <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.amount}</td>
-        <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.month}</td>
-        <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.year}</td>
-        <td className={props.todo.todo_completed ? 'completed' : ''}>{props.todo.todo_priority}</td>
+        <td>{props.todo.description}</td>
+        <td>{props.todo.amount}</td>
+        <td>{props.todo.month}</td>
+        <td>{props.todo.year}</td>
         <td>
             <Link to={"/edit/"+props.todo._id}>Edit</Link>
         </td>
@@ -34,7 +33,7 @@ export default class TodosList extends Component {
             })
     }
 
-    todoList() {
+    expenseList() {
         return this.state.todos.map(function(currentTodo, i){
             return <Expense todo={currentTodo} key={i} />;
         })
@@ -51,12 +50,11 @@ export default class TodosList extends Component {
                             <th>Amount</th>
                             <th>Month</th>
                             <th>Year</th>
-                            <th>Priority</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        { this.todoList() }
+                        { this.expenseList() }
                     </tbody>
                 </table>
             </div>
