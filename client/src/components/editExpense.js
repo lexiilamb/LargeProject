@@ -11,6 +11,7 @@ export default class EditExpense extends Component {
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeAmount = this.onChangeAmount.bind(this);
 		this.onChangeMonth = this.onChangeMonth.bind(this);
+		this.onChangeDay = this.onChangeDay.bind(this);
 		this.onChangeYear = this.onChangeYear.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
@@ -18,6 +19,7 @@ export default class EditExpense extends Component {
             description: '',
             amount: '',
             month: '',
+            day: '',
             year: ''
         }
     }
@@ -29,6 +31,7 @@ export default class EditExpense extends Component {
                     description: response.data.description,
                     amount: response.data.amount,
 					month: response.data.month,
+					day: response.data.month,
 					year: response.data.year
                 })   
             })
@@ -55,6 +58,12 @@ export default class EditExpense extends Component {
         });
     }
 	
+	onChangeDay(e) {
+        this.setState({
+            day: e.target.value
+        });
+    }
+	
 	onChangeYear(e) {
         this.setState({
             year: e.target.value
@@ -67,6 +76,7 @@ export default class EditExpense extends Component {
             description: this.state.description,
             amount: this.state.amount,
             month: this.state.month,
+            day: this.state.day,
             year: this.state.year
         };
         console.log(obj);
@@ -104,6 +114,14 @@ export default class EditExpense extends Component {
                                 className="form-control"
                                 value={this.state.month}
                                 onChange={this.onChangeMonth}
+                                />
+                    </div>
+					<div className="form-group"> 
+                        <label>Day: </label>
+                        <input  type="text"
+                                className="form-control"
+                                value={this.state.day}
+                                onChange={this.onChangeDay}
                                 />
                     </div>
 					<div className="form-group"> 

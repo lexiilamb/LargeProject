@@ -11,6 +11,7 @@ export default class CreateExpense extends Component {
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeAmount = this.onChangeAmount.bind(this);
 		this.onChangeMonth = this.onChangeMonth.bind(this);
+		this.onChangeDay = this.onChangeDay.bind(this);
 		this.onChangeYear = this.onChangeYear.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
@@ -18,6 +19,7 @@ export default class CreateExpense extends Component {
             description: '',
             amount: '',
             month: '',
+            day: '',
             year: ''
         }
     }
@@ -40,6 +42,12 @@ export default class CreateExpense extends Component {
         });
     }
 	
+	onChangeDay(e) {
+        this.setState({
+            day: e.target.value
+        });
+    }
+	
 	onChangeYear(e) {
         this.setState({
             year: e.target.value
@@ -53,12 +61,14 @@ export default class CreateExpense extends Component {
         console.log(`Description: ${this.state.description}`);
         console.log(`Amount: ${this.state.amount}`);
 		console.log(`Month: ${this.state.month}`);
+		console.log(`Day: ${this.state.day}`);
 		console.log(`Year: ${this.state.year}`);
      
         const newExpense = {
             description: this.state.description,
             amount: this.state.amount,
             month: this.state.month,
+            day: this.state.month,
             year: this.state.year
         };
 
@@ -69,6 +79,7 @@ export default class CreateExpense extends Component {
             description: '',
             amount: '',
             month: '',
+            day: '',
             year: ''
         }
     }
@@ -101,6 +112,14 @@ export default class CreateExpense extends Component {
                                 className="form-control"
                                 value={this.state.month}
                                 onChange={this.onChangeMonth}
+                                />
+                    </div>
+					<div className="form-group"> 
+                        <label>Day: </label>
+                        <input  type="text"
+                                className="form-control"
+                                value={this.state.day}
+                                onChange={this.onChangeDay}
                                 />
                     </div>
 					<div className="form-group"> 

@@ -9,9 +9,13 @@ const Expense = props => (
         <td>{props.item.description}</td>
         <td>{props.item.amount}</td>
         <td>{props.item.month}</td>
+        <td>{props.item.day}</td>
         <td>{props.item.year}</td>
         <td>
             <Link to={"/edit/"+props.item._id}>Edit</Link>
+        </td>
+		<td>
+            <Link to={"/delete/"+props.item._id}>Delete</Link>
         </td>
     </tr>
 )
@@ -49,6 +53,7 @@ export default class TodosList extends Component {
                             <th>Description</th>
                             <th>Amount</th>
                             <th>Month</th>
+                            <th>Day</th>
                             <th>Year</th>
                             <th>Action</th>
                         </tr>

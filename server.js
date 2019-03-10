@@ -55,6 +55,7 @@ expenseRoutes.route('/update/:id').post(function(req, res) {
             expense.description = req.body.description;
             expense.amount = req.body.amount;
             expense.month = req.body.month;
+            expense.day = req.body.day;
             expense.year = req.body.year;
             expense.save().then(expense => {
                 res.json('Expense updated!');
