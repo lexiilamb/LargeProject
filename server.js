@@ -50,9 +50,7 @@ expenseRoutes.route('/update/:id').post(function(req, res) {
     });
 });
 
-expenseRoutes.route('/delete/:id').post(function(req, res) {
-    Expense.findOneAndDelete({req.params.id}).then((doc) => {});
-});
+
 
 expenseRoutes.route('/add').post(function(req, res) {
     let expense = new Expense(req.body);
