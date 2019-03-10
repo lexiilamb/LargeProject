@@ -86,7 +86,7 @@ router.post('/deleteExpense', (req, res, next) => {
 
 // Route to return ALL expenses in the database.
 router.post("/getAllExpenses", (req, res, next) => {
-  const userId = 5c85369a9818a709dcdf0ab7;
+  const userId = "5c78ce86a484a23550339d6a";
   Expense.find({userId: userId})
 		.select("_id userId description amount month day year")
 		.exec()
