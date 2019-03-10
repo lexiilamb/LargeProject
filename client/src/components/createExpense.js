@@ -69,7 +69,7 @@ export default class CreateExpense extends Component {
             description: this.state.description,
             amount: this.state.amount,
             month: this.state.month,
-            day: this.state.month,
+            day: this.state.day,
             year: this.state.year
         };
 
