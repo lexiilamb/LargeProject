@@ -32,7 +32,7 @@ class App extends Component {
           </nav>
           <br/>
           <Route path="/" exact component={ExpensesList} />
-          <Route path="/edit" component={EditExpense} />
+          <Route path="/edit/:id" component={EditExpense} />
           <Route path="/create" component={CreateExpense} />
         </div>
       </Router>
