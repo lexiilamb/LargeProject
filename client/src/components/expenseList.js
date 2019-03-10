@@ -10,9 +10,9 @@ const Expense = props => (
         <td>{props.todo.amount}</td>
         <td>{props.todo.month}</td>
         <td>{props.todo.year}</td>
-        <td>
-            <Link to={"/edit/"+props.todo._id}>Edit</Link>
-        </td>
+        //<td>
+            //<Link to={"/edit/"+props.todo._id}>Edit</Link>
+        //</td>
     </tr>
 )
 
