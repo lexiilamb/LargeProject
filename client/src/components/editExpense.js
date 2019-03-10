@@ -31,7 +31,7 @@ export default class EditExpense extends Component {
                     description: response.data.description,
                     amount: response.data.amount,
 					month: response.data.month,
-					day: response.data.month,
+					day: response.data.day,
 					year: response.data.year
                 })   
             })
