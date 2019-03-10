@@ -24,7 +24,7 @@ export default class TodosList extends Component {
     }
 
     componentDidMount() {
-        axios.get('/expenses')
+        axios.get('/expenses/')
             .then(response => {
                 this.setState({ todos: response.data });
             })

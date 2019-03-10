@@ -1,67 +1,67 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
-
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const mongoose = require('mongoose');
+const expenseRoutes = express.Router();
 const PORT = process.env.PORT || 4000; // "process.env.PORT" is Heroku's port if we're deploying there, then 4000 is a custom chosen port for dev testing
-
-
-// this is our MongoDB database
-const dbRoute = "mongodb://Admin:Hello2@cluster0-shard-00-00-7dwwj.mongodb.net:27017,cluster0-shard-00-01-7dwwj.mongodb.net:27017,cluster0-shard-00-02-7dwwj.mongodb.net:27017/testEXP?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true";
-
-// connects our back end code with the database
-mongoose.connect(
-  dbRoute,
-  { useNewUrlParser: true }
-);
-
-
-require('./models/expense');
-require('./models/user');
-
-var expenseRouter = require('./routes/expenses');
-var userRouter = require('./routes/user');
-
-var app = express();
-
-// view engine setup
-//app.set('views', path.join(__dirname, 'views'));
-//app.set('view engine', 'ejs');
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(bodyParser.urlencoded({extended: false}));
+const path = require("path");
+const dotenv = require("dotenv").config();
+let Expense = require('./expense');
+app.use(cors());
 app.use(bodyParser.json());
-app.use(cookieParser());
-
-// Routes which should handle requests
-app.use('/user', userRouter);
-app.use('/expenses', expenseRouter);
-
-app.use((req, res, next) =>{
-	const error = new Error('Not found');
-	error.status = 404;
-	next(error);
+app.use(express.static(path.join(__dirname, "client", "build")))
+mongoose.connect('mongodb://Admin:Hello2@cluster0-shard-00-00-7dwwj.mongodb.net:27017,cluster0-shard-00-01-7dwwj.mongodb.net:27017,cluster0-shard-00-02-7dwwj.mongodb.net:27017/testLarge?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true', { useNewUrlParser: true });
+const connection = mongoose.connection;
+connection.once('open', function() {
+    console.log("MongoDB database connection established successfully");
 })
-
-app.use((error, req, res, next) => {
-	res.status(error.status || 500);
-	res.json({
-		error: {
-			message: error.message
-		}
-	})
+expenseRoutes.route('/').get(function(req, res) {
+    Expense.find(function(err, expenses) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(expenses);
+        }
+    });
 });
-
+expenseRoutes.route('/:id').get(function(req, res) {
+    let id = req.params.id;
+    Expense.findById(id, function(err, expense) {
+        res.json(expense);
+    });
+});
+expenseRoutes.route('/update/:id').post(function(req, res) {
+    Expense.findById(req.params.id, function(err, expense) {
+        if (!expense)
+            res.status(404).send("data is not found");
+        else
+            expense.description = req.body.description;
+            expense.amount = req.body.amount;
+            expense.month = req.body.month;
+            expense.year = req.body.year;
+            expense.save().then(expense => {
+                res.json('Expense updated!');
+            })
+            .catch(err => {
+                res.status(400).send("Update not possible");
+            });
+    });
+});
+expenseRoutes.route('/add').post(function(req, res) {
+    let expense = new Expense(req.body);
+    expense.save()
+        .then(expense => {
+            res.status(200).json({'expense': 'expense added successfully'});
+        })
+        .catch(err => {
+            res.status(400).send('adding new expense failed');
+        });
+});
+app.use('/expenses', expenseRoutes);
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
-
-// launch our backend into a port
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);
 });
