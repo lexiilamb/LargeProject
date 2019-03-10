@@ -6,7 +6,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import ExpensesList from "./components/expenseList";
 import CreateExpense from "./components/createExpense";
 import EditExpense from "./components/editExpense";
-import DeleteExpense from "./components/deleteExpense";
 
 import logo from "./logo.png";
 
