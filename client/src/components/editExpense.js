@@ -89,8 +89,7 @@ export default class EditExpense extends Component {
 	deleteExpense(e) {
         e.preventDefault();
         
-        console.log(obj);
-        axios.delete('/expenses/'+this.props.match.params.id, obj)
+        axios.delete('/expenses/'+this.props.match.params.id)
             .then(res => console.log(res.data));
         
         this.props.history.push('/');
