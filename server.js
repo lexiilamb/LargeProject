@@ -7,7 +7,7 @@ const expenseRoutes = express.Router();
 const PORT = process.env.PORT || 4000; // "process.env.PORT" is Heroku's port if we're deploying there, then 4000 is a custom chosen port for dev testing
 const path = require("path");
 const dotenv = require("dotenv").config();
-let Expense = require('./expense');
+let Expense = require('./models/expense');
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "client", "build")))
@@ -17,7 +17,18 @@ connection.once('open', function() {
     console.log("MongoDB database connection established successfully");
 })
 
-// Route to return ALL expenses in the database.
+// Route to return ALL expenses in the database for a ALL users.
+expenseRoutes.route('/').get(function(req, res) {
+    Expense.find(function(err, expenses) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(expenses);
+        }
+    });
+});
+
+// Route to return ALL expenses in the database for a specific user.
 expenseRoutes.get("/getAllExpenses", (req, res, next) => {
   const userId = "5c78ce86a484a23550339d6a";
   Expense.find({userId: userId}, function(err, expenses) {
@@ -29,15 +40,7 @@ expenseRoutes.get("/getAllExpenses", (req, res, next) => {
   });
 });
 
-expenseRoutes.route('/').get(function(req, res) {
-    Expense.find(function(err, expenses) {
-        if (err) {
-            console.log(err);
-        } else {
-            res.json(expenses);
-        }
-    });
-});
+// Route to return specific expense in database.
 expenseRoutes.route('/:id').get(function(req, res) {
     let id = req.params.id;
     Expense.findById(id, function(err, expense) {

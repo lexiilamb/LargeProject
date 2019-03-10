@@ -84,33 +84,15 @@ router.post('/deleteExpense', (req, res, next) => {
   });
 });
 
-// Route to return ALL expenses in the database.
-router.post("/getAllExpenses", (req, res, next) => {
+// Route to return ALL expenses in the database for a specific user.
+expenseRoutes.get("/getAllExpenses", (req, res, next) => {
   const userId = "5c78ce86a484a23550339d6a";
-  Expense.find({userId: userId})
-		.select("_id userId description amount month day year")
-		.exec()
-		.then(docs => {
-    const response = {
-	  userId: userId,
-	  total: docs.length,
-	  expenses: docs.map(doc => {
-	    return {
-		  description: doc.description,
-		  amount: doc.amount,
-		  month: doc.month,
-		  day: doc.day,
-		  year: doc.year,
-		}
-	  })
-	};
-    res.status(200).json(response);
-  })
-  .catch(err => {
-	console.log(err);
-	res.status(500).json({
-  	  error: err
-	})
+  Expense.find({userId: userId}, function(err, expenses) {
+	if (err) {
+		console.log(err);
+	} else {
+		res.json(expenses);
+	}
   });
 });
 

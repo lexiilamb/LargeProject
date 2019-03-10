@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 //import CreateExpense from "./components/createExpense";
-//import EditExpense from "./components/editExpense";
+import EditExpense from "./components/editExpense";
 import ExpensesList from "./components/expenseList";
 
 import logo from "./logo.png";
@@ -32,6 +32,7 @@ class App extends Component {
           </nav>
           <br/>
           <Route path="/" exact component={ExpensesList} />
+		  <Route path="/edit/:id" component={EditExpense} />
         </div>
       </Router>
     );
