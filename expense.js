@@ -16,12 +16,6 @@ let expenseSchema = new Schema({
 	year: {
         type: Number,
 		required: true
-    },
-    todo_priority: {
-        type: String
-    },
-    todo_completed: {
-        type: Boolean
     }
 });
 module.exports = mongoose.model('Expense', expenseSchema);

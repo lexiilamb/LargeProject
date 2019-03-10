@@ -40,8 +40,6 @@ expenseRoutes.route('/update/:id').post(function(req, res) {
             expense.amount = req.body.amount;
             expense.month = req.body.month;
             expense.year = req.body.year;
-            expense.todo_priority = req.body.todo_priority;
-            expense.todo_completed = req.body.todo_completed;
             expense.save().then(expense => {
                 res.json('Expense updated!');
             })
