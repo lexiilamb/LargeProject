@@ -6,12 +6,12 @@ const PORT = process.env.PORT || 4000; // "process.env.PORT" is Heroku's port if
 
 const Expense = props => (
     <tr>
-        <td>{props.todo.description}</td>
-        <td>{props.todo.amount}</td>
-        <td>{props.todo.month}</td>
-        <td>{props.todo.year}</td>
+        <td>{props.item.description}</td>
+        <td>{props.item.amount}</td>
+        <td>{props.item.month}</td>
+        <td>{props.item.year}</td>
         //<td>
-            //<Link to={"/edit/"+props.todo._id}>Edit</Link>
+            //<Link to={"/edit/"+props.item._id}>Edit</Link>
         //</td>
     </tr>
 )
@@ -34,8 +34,8 @@ export default class TodosList extends Component {
     }
 
     todoList() {
-        return this.state.todos.map(function(currentTodo, i){
-            return <Expense todo={currentTodo} key={i} />;
+        return this.state.todos.map(function(currentExpense, i){
+            return <Expense item={currentExpense} key={i} />;
         })
     }
 

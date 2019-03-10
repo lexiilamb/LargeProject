@@ -6,8 +6,8 @@ const expenseSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       required: false
     },
-	expenseDescription: { type: String, required: true },
-	expenseAmount: { type: Number, required: true },
+	description: { type: String, required: true },
+	amount: { type: Number, required: true },
 	month: { type: String, required: true },
 	day: { type: String, required: false },
 	year: { type: Number, required: true}
