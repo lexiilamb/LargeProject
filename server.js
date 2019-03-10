@@ -47,6 +47,7 @@ expenseRoutes.route('/:id').get(function(req, res) {
         res.json(expense);
     });
 });
+
 expenseRoutes.route('/update/:id').post(function(req, res) {
     Expense.findById(req.params.id, function(err, expense) {
         if (!expense)

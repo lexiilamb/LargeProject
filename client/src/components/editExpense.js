@@ -85,6 +85,16 @@ export default class EditExpense extends Component {
         
         this.props.history.push('/');
     }
+	
+	deleteExpense(e) {
+        e.preventDefault();
+        
+        console.log(obj);
+        axios.delete('/expenses/'+this.props.match.params.id, obj)
+            .then(res => console.log(res.data));
+        
+        this.props.history.push('/');
+    }
 
     render() {
         return (
@@ -137,6 +147,11 @@ export default class EditExpense extends Component {
 
                     <div className="form-group">
                         <input type="submit" value="Update Expense" className="btn btn-success" />
+                    </div>
+                </form>
+				
+				<form onSubmit={this.deleteExpense}>
+                    <div className="form-group">
                         <input type="submit" value="Delete Expense" className="btn btn-danger" />
                     </div>
                 </form>

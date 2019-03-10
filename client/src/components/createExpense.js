@@ -65,6 +65,7 @@ export default class CreateExpense extends Component {
 		console.log(`Year: ${this.state.year}`);
      
         const newExpense = {
+			userId: "5c78ce86a484a23550339d6a";
             description: this.state.description,
             amount: this.state.amount,
             month: this.state.month,

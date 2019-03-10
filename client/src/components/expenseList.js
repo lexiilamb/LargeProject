@@ -14,9 +14,6 @@ const Expense = props => (
         <td>
             <Link to={"/edit/"+props.item._id}>Edit</Link>
         </td>
-		<td>
-            <Link to={"/delete/"+props.item._id}>Delete</Link>
-        </td>
     </tr>
 )
 
