@@ -185,7 +185,8 @@ export default class EditExpense extends Component {
                     <br />
 
                     <div className="form-group">
-                        <input type="submit" value="Update Expense" className="btn btn-primary" />
+                        <input type="submit" value="Update Expense" className="btn btn-success" />
+						<input type="submit" value="Delete Expense" className="btn btn-danger" />
                     </div>
                 </form>
             </div>

@@ -50,6 +50,21 @@ expenseRoutes.route('/update/:id').post(function(req, res) {
             });
     });
 });
+
+expenseRoutes.route('/delete/:id').post(function(req, res) {
+    Expense.remove(req.params.id, function(err, expense) {
+        if (!expense)
+            res.status(404).send("data is not found");
+        else
+			.then(expense => {
+                res.json('Expense Deleted!');
+            })
+            .catch(err => {
+                res.status(400).send("Delete not possible");
+            });
+    });
+});
+
 expenseRoutes.route('/add').post(function(req, res) {
     let expense = new Expense(req.body);
     expense.save()
