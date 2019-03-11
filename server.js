@@ -56,12 +56,13 @@ expenseRoutes.get("/Jan", (req, res, next) => {
 });
 
 // Route to return all expenses for a specific month
-expenseRoutes.get("/month", (req, res, next) => {
+expenseRoutes.get("/month/:newMonth", (req, res, next) => {
 	console.log("In month route");
   const userId = "5c78ce86a484a23550339d6a";
-  var month = req.body.changeMonth;
+  const month = req.params.newMonth;
   console.log(month);
   Expense.find({userId: userId, month: month}, function(err, expenses) {
+	console.log(expenses);
 	if (err) {
 		console.log(err);
 	} else {

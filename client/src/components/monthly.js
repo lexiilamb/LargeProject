@@ -33,9 +33,9 @@ export default class TodosList extends Component {
 		const obj = {
             changeMonth: month
         };
-		
+		console.log(month);
 		console.log(obj);
-        axios.get('expenses/month', obj)
+        axios.get('expenses/month/'+month)
             .then(response => {
                 this.setState({ todos: response.data });
             })
