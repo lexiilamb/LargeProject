@@ -41,7 +41,7 @@ class App extends Component {
 		  <Route path="/" exact component={ExpensesList} />
           <Route path="/create" component={CreateExpense} />
 		  <Route path="/edit/:id" component={EditExpense} />
-		  <Route path="/monthly" component={Monthly} />
+		  <Route path="/month" component={Monthly} />
         </div>
       </Router>
     );
