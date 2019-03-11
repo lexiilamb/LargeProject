@@ -88,7 +88,7 @@ export default class EditExpense extends Component {
     }
 	
 	deleteExpense(id) {
-        e.preventDefault();
+        id.preventDefault();
 		
         axios.delete('/expenses/delete/'+id)
             .then(res => console.log(res.data));
