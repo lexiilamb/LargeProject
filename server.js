@@ -41,6 +41,21 @@ expenseRoutes.get("/getAllExpenses", (req, res, next) => {
 });
 
 // Route to return all expenses for a specific month
+expenseRoutes.get("/month/Jan", (req, res, next) => {
+  console.log("In Jan month route");
+  const userId = "5c78ce86a484a23550339d6a";
+  var month = "Jan";
+  console.log(month);
+  Expense.find({userId: userId, month: month}, function(err, expenses) {
+	if (err) {
+		console.log(err);
+	} else {
+		res.json(expenses);
+	}
+  });
+});
+
+// Route to return all expenses for a specific month
 expenseRoutes.get("/month", (req, res, next) => {
 	console.log("In month route");
   const userId = "5c78ce86a484a23550339d6a";
