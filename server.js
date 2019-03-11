@@ -48,6 +48,19 @@ expenseRoutes.route('/:id').get(function(req, res) {
     });
 });
 
+// Route to add expense 
+expenseRoutes.route('/add').post(function(req, res) {
+    let expense = new Expense(req.body);
+	const id = expense._id;
+    expense.save()
+        .then(expense => {
+            res.status(200).json({success: id});
+        })
+        .catch(err => {
+            res.status(400).send('adding new expense failed');
+        });
+});
+
 expenseRoutes.route('/update/:id').post(function(req, res) {
     Expense.findById(req.params.id, function(err, expense) {
         if (!expense)
@@ -59,7 +72,7 @@ expenseRoutes.route('/update/:id').post(function(req, res) {
             expense.day = req.body.day;
             expense.year = req.body.year;
             expense.save().then(expense => {
-                res.json('Expense updated!');
+                res.json(success: id);
             })
             .catch(err => {
                 res.status(400).send("Update not possible");
@@ -81,17 +94,6 @@ expenseRoutes.delete("/delete/:id", (req, res, next) => {
   });
 });
 
-// Route to add expense 
-expenseRoutes.route('/add').post(function(req, res) {
-    let expense = new Expense(req.body);
-    expense.save()
-        .then(expense => {
-            res.status(200).json({'expense': 'expense added successfully'});
-        })
-        .catch(err => {
-            res.status(400).send('adding new expense failed');
-        });
-});
 app.use('/expenses', expenseRoutes);
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
