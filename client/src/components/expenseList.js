@@ -43,6 +43,7 @@ export default class TodosList extends Component {
         return (
             <div>
                 <h3>Expense List</h3>
+                <h5>Total: </h5>
                 <table className="table table-striped" style={{ marginTop: 20 }} >
                     <thead>
                         <tr>
