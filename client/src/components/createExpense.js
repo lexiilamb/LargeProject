@@ -83,6 +83,8 @@ export default class CreateExpense extends Component {
             day: '',
             year: ''
         }
+		
+		this.props.history.push('/');
     }
 
     render() {
