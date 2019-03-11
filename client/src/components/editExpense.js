@@ -145,7 +145,7 @@ export default class EditExpense extends Component {
 
                     <div className="form-group">
                         <input type="submit" value="Update Expense" className="btn btn-success" />
-						<button onClick={this.props.deleteExpense()}>DELETE</button>
+						<button onClick={this.deleteExpense()}>DELETE</button>
                     </div>
                 </form>
             </div>
