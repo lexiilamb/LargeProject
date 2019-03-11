@@ -70,8 +70,7 @@ expenseRoutes.route('/update/:id').post(function(req, res) {
 // Route to delete
 expenseRoutes.delete("/delete/:id", (req, res, next) => {
   const userId = "5c78ce86a484a23550339d6a";
-  const id = req.params.id;
-  const description = req.params.description;
+  const id = req.body.idToDelete;
   Expense.findOneAndDelete({_id: id}, function(err, expenses) {
 	if (err) {
 		console.log(err);
