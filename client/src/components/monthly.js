@@ -24,7 +24,7 @@ export default class TodosList extends Component {
     }
 
     componentDidMount() {
-        axios.get('/expenses/getAllExpenses')
+        axios.get('/expenses/Jan')
             .then(response => {
                 this.setState({ todos: response.data });
             })
@@ -42,7 +42,7 @@ export default class TodosList extends Component {
     render() {
         return (
             <div>
-                <h3>Expense List</h3>
+                <h3><img src={logo} width="150" height="75" alt="CodingTheSmartWay.com" />Expense List<img src={logo} width="150" height="75" alt="CodingTheSmartWay.com" /></h3>
                 <table className="table table-striped" style={{ marginTop: 20 }} >
                     <thead>
                         <tr>
