@@ -29,7 +29,7 @@ class App extends Component {
                   <Link to="/create" className="nav-link">Create Expense</Link>
                 </li>
 				<li className="navbar-item">
-                  <Link to="/monthly" className="nav-link">Monthly</Link>
+                  <Link to="/month" className="nav-link">Monthly</Link>
                 </li>
               </ul>
             </div>
