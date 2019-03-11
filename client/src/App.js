@@ -29,7 +29,7 @@ class App extends Component {
                   <Link to="/create" className="nav-link">Create Expense</Link>
                 </li>
 				<li className="navbar-item">
-                  <Link to="/month" className="nav-link">Monthly</Link>
+                  <Link to="/monthly" className="nav-link">Monthly</Link>
                 </li>
               </ul>
             </div>
@@ -41,7 +41,7 @@ class App extends Component {
 		  <Route path="/" exact component={ExpensesList} />
           <Route path="/create" component={CreateExpense} />
 		  <Route path="/edit/:id" component={EditExpense} />
-		  <Route path="/month" component={Monthly} />
+		  <Route path="/monthly" component={Monthly} />
         </div>
       </Router>
     );
