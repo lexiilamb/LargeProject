@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import YearTabsRouter from './tabs/yearTabsRouter';
-import MonthTabs from './tabs/monthTabs';
 import logo from "../krabs.gif";
 
 const Expense = props => (
@@ -63,29 +61,29 @@ export default class TodosList extends Component {
     render() {
         return (
             <div>
-                <h3><center><img src={logo} width="150" height="75"/>	Monthly Lists	<img src={logo} width="150" height="75" alt="CodingTheSmartWay.com" /></center></h3>
+                <h3><center><img src={logo} width="150" height="75" alt=""/>	Monthly Lists	<img src={logo} width="150" height="75" alt="" /></center></h3>
 				<div className="container">
 				  <nav className="navbar navbar-expand-lg navbar-light bg-light">
 					<div className="collpase navbar-collapse">
 					  <ul className="navbar-nav mr-auto">
-						  <button type="submit" class="btn btn-priority" onClick={() => {this.onChangeMonth('Jan')}}>Jan</button>
-						  <button type="submit" class="btn btn-priority" onClick={() => {this.onChangeMonth('Feb')}}>Feb</button>
-						  <button type="submit" class="btn btn-priority" onClick={() => {this.onChangeMonth('March')}}>March</button>
-						  <button type="submit" class="btn btn-priority" onClick={() => {this.onChangeMonth('April')}}>April</button>
-						  <button type="submit" class="btn btn-priority" onClick={() => {this.onChangeMonth('May')}}>May</button>
-						  <button type="submit" class="btn btn-priority" onClick={() => {this.onChangeMonth('June')}}>June</button>
-						  <button type="submit" class="btn btn-priority" onClick={() => {this.onChangeMonth('July')}}>July</button>
-						  <button type="submit" class="btn btn-priority" onClick={() => {this.onChangeMonth('Aug')}}>Aug</button>
-						  <button type="submit" class="btn btn-priority" onClick={() => {this.onChangeMonth('Sep')}}>Sep</button>
-						  <button type="submit" class="btn btn-priority" onClick={() => {this.onChangeMonth('Oct')}}>Oct</button>
-						  <button type="submit" class="btn btn-priority" onClick={() => {this.onChangeMonth('Nov')}}>Nov</button>
-						  <button type="submit" class="btn btn-priority" onClick={() => {this.onChangeMonth('Dec')}}>Dec</button>
+						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Jan')}}>Jan</button>
+						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Feb')}}>Feb</button>
+						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('March')}}>March</button>
+						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('April')}}>April</button>
+						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('May')}}>May</button>
+						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('June')}}>June</button>
+						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('July')}}>July</button>
+						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Aug')}}>Aug</button>
+						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Sep')}}>Sep</button>
+						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Oct')}}>Oct</button>
+						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Nov')}}>Nov</button>
+						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Dec')}}>Dec</button>
 					  </ul>
 					</div>
 				  </nav>
 				</div>
                 <table className="table table-striped" style={{ marginTop: 30 }} >
-                    <thead class="thead-dark">
+                    <thead className="thead-dark">
                         <tr>
                             <th>Description</th>
                             <th>Amount</th>

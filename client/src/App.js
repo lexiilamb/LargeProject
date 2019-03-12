@@ -17,7 +17,7 @@ class App extends Component {
         <div className="container">
 		<center><h1><font size = "10"><b>Track Dat CA$H</b></font></h1></center><br/>
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <img src={logo} width="100" height="100"/>
+            <img src={logo} width="100" height="100" alt=""/>
             <div className="collpase navbar-collapse">
               <ul className="navbar-nav mr-auto">
                 <li className="navbar-item">
@@ -31,7 +31,7 @@ class App extends Component {
                 </li>
               </ul>
             </div>
-			<img src={logo} width="100" height="100"/>
+			<img src={logo} width="100" height="100" alt=""/>
           </nav>
           <br/>
 		  <Route path="/" exact component={ExpensesList} />

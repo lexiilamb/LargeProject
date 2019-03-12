@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
+import Select from 'react-select';
 import axios from 'axios';
+
+const options = [
+  { value: 'Jan', label: 'Jan' },
+  { value: 'Feb', label: 'Feb' },
+  { value: 'Dec', label: 'Dec' }
+];
 
 export default class CreateExpense extends Component {
 
@@ -16,7 +23,7 @@ export default class CreateExpense extends Component {
         this.state = {
             description: '',
             amount: '',
-            month: '',
+            selectedMonth: '',
             day: '',
             year: ''
         }
@@ -34,10 +41,11 @@ export default class CreateExpense extends Component {
         });
     }
 	
-	onChangeMonth(e) {
+	onChangeMonth(selectedMonth) {
         this.setState({
-            month: e
+            month: selectedMonth.value
         });
+		console.log(`Option selected:`, selectedMonth.value);
     }
 	
 	onChangeDay(e) {
@@ -86,6 +94,8 @@ export default class CreateExpense extends Component {
     }
 
     render() {
+		const { selectedMonth } = this.state;
+		
         return (
             <div style={{marginTop: 10}}>
                 <h3>Create New Expense</h3>
@@ -107,15 +117,16 @@ export default class CreateExpense extends Component {
                                 onChange={this.onChangeAmount}
                                 />
                     </div>
-					
+				
 					<div className="form-group">
-					  <label class="mr-sm-2" for="inlineFormCustomSelect">Month: </label>
-					  <select value={this.state.month} class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-						<option selected>Choose...</option>
-						<option value="Jan" onChange={this.onChangeMonth}>Jan</option>
-						<option value="Feb" onChange={this.onChangeMonth}>Feb</option>
-					  </select>
+					  <label>Month: </label>
+					  <Select
+						value={selectedMonth}
+						onChange={this.onChangeMonth}
+						options={options}
+					  />
 					</div>
+					
 	
 					<div className="form-group"> 
                         <label>Day: </label>

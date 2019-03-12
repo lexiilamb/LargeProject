@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import logo from "../krabs.gif";
 
 const Expense = props => (
     <tr>
@@ -45,7 +44,7 @@ export default class TodosList extends Component {
                 <h3><center>All Expenses</center></h3>
                 <h5>Total: </h5>
                 <table className="table table-striped" style={{ marginTop: 30 }} >
-                    <thead class="thead-dark">
+                    <thead className="thead-dark">
                         <tr>
                             <th>Description</th>
                             <th>Amount</th>
