@@ -16,7 +16,7 @@ class App extends Component {
       <Router>
         <div className="container">
 		<center><h1><font size = "10"><b>Track Dat CA$H</b></font></h1></center><br/>
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <nav className="navbar navbar-expand-sm navbar-light bg-light">
             <img src={logo} width="100" height="100" alt=""/>
             <div className="collpase navbar-collapse">
               <ul className="navbar-nav mr-auto">
