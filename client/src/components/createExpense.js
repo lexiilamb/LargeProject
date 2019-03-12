@@ -107,14 +107,18 @@ export default class CreateExpense extends Component {
                                 onChange={this.onChangeAmount}
                                 />
                     </div>
-					<div className="form-group"> 
-                        <label>Month: </label>
-                        <input  type="text"
-                                className="form-control"
-                                value={this.state.month}
-                                onChange={this.onChangeMonth}
-                                />
-                    </div>
+					
+					<div className="form-group">
+					  <label class="mr-sm-2" for="inlineFormCustomSelect">Month: </label>
+					  <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+						<option selected>Choose...</option>
+						<option value="Jan" onChange={this.onChangeMonth}>Jan</option>
+						<option value="Feb" onChange={this.onChangeMonth}>Feb</option>
+						<option value="March" onChange={this.onChangeMonth}>March</option>
+						<option value="April" onChange={this.onChangeMonth}>April</option>
+					  </select>
+					</div>
+	
 					<div className="form-group"> 
                         <label>Day: </label>
                         <input  type="text"
