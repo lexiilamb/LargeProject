@@ -54,7 +54,7 @@ export default class TodosList extends Component {
             })
     }
 
-    todoList() {
+    listOfExpenses() {
         return this.state.todos.map(function(currentExpense, i){
             return <Expense item={currentExpense} key={i} />;
         })
@@ -63,7 +63,7 @@ export default class TodosList extends Component {
     render() {
         return (
             <div>
-                <h3><img src={logo} width="150" height="75" alt="CodingTheSmartWay.com" />Expense List<img src={logo} width="150" height="75" alt="CodingTheSmartWay.com" /></h3>
+                <h3><center><img src={logo} width="150" height="75"/>	Monthly Lists	<img src={logo} width="150" height="75" alt="CodingTheSmartWay.com" /></center></h3>
 				<div className="container">
 				  <nav className="navbar navbar-expand-lg navbar-light bg-light">
 					<div className="collpase navbar-collapse">
@@ -84,8 +84,8 @@ export default class TodosList extends Component {
 					</div>
 				  </nav>
 				</div>
-                <table className="table table-striped" style={{ marginTop: 20 }} >
-                    <thead>
+                <table className="table table-striped" style={{ marginTop: 30 }} >
+                    <thead class="thead-dark">
                         <tr>
                             <th>Description</th>
                             <th>Amount</th>
@@ -96,7 +96,7 @@ export default class TodosList extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        { this.todoList() }
+                        { this.listOfExpenses() }
                     </tbody>
                 </table>
             </div>

@@ -42,10 +42,10 @@ export default class TodosList extends Component {
     render() {
         return (
             <div>
-                <h3>Expense List</h3>
+                <h3><center>All Expenses</center></h3>
                 <h5>Total: </h5>
-                <table className="table table-striped" style={{ marginTop: 20 }} >
-                    <thead>
+                <table className="table table-striped" style={{ marginTop: 30 }} >
+                    <thead class="thead-dark">
                         <tr>
                             <th>Description</th>
                             <th>Amount</th>
