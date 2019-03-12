@@ -51,7 +51,7 @@ export default class TodosList extends Component {
 			return a.sort > b.sort;
 		});
 		this.setState({ todos: temp });
-		console.log(sort);
+		console.log(temp);
     }
 
     todoList() {
@@ -67,6 +67,7 @@ export default class TodosList extends Component {
 		for(i; i <length; i++)
 			sum += this.state.todos[this.state.i].amount;
 		this.setState({ total: sum });
+		console.log(sum);
 	}
 
     render() {	
