@@ -29,7 +29,7 @@ export default class TodosList extends Component {
     componentDidMount() {
         axios.get('/expenses/getAllExpenses')
             .then(response => {
-				response.sort(function(a, b) {
+				response.data.sort(function(a, b) {
 					return a.description > b.description;
 				});
                 this.setState({ todos: response.data });
