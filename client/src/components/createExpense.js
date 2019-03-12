@@ -112,7 +112,7 @@ export default class CreateExpense extends Component {
 					  <label class="mr-sm-2" for="inlineFormCustomSelect">Month: </label>
 					  <select value={this.state.month} class="custom-select mr-sm-2" id="inlineFormCustomSelect">
 						<option selected>Choose...</option>
-						<option value={Jan} onChange={this.onChangeMonth()}>Jan</option>
+						<option value={"Jan"} onChange={this.onChangeMonth()}>Jan</option>
 						<option value={"Feb"} onChange={this.onChangeMonth()}>Feb</option>
 					  </select>
 					</div>
