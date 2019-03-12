@@ -36,7 +36,7 @@ export default class CreateExpense extends Component {
 	
 	onChangeMonth(e) {
         this.setState({
-            month: e.target.value
+            month: e
         });
     }
 	
