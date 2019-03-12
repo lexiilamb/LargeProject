@@ -47,8 +47,8 @@ export default class TodosList extends Component {
 		console.log(sort);
     }
 
-    todoList(newList) {
-        return newList.map(function(currentExpense, i){
+    todoList() {
+        return this.state.todos.map(function(currentExpense, i){
             return <Expense item={currentExpense} key={i} />;
         })
     }
@@ -56,11 +56,10 @@ export default class TodosList extends Component {
 	totalAmount(listOfExpenses) {
 		for(this.state.i = 0; this.state.i <this.state.todos.length; this.state.i++)
 			this.state.sum += this.state.todos[this.state.i].amount;
+		
 	}
 
-    render() {
-		var updatedList = this.state.todos;
-	
+    render() {	
         return (
             <div>
                 <h3><center>All Expenses</center></h3>
@@ -77,7 +76,7 @@ export default class TodosList extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        { this.todoList(updatedList) }
+                        { this.todoList() }
                     </tbody>
                 </table>
             </div>
