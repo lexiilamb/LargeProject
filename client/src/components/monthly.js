@@ -78,7 +78,7 @@ export default class TodosList extends Component {
 					</div>
 				  </nav>
 				</div>
-                <table className="table table-striped" style={{ marginTop: 30 }} >
+                <table className="table table-striped table-bordered" style={{ marginTop: 30 }} >
                     <thead className="thead-dark">
                         <tr>
                             <th>Description</th>

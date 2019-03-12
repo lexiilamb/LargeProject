@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+var temp = [];
+
 const Expense = props => (
     <tr>
         <td>{props.item.description}</td>
@@ -29,10 +31,11 @@ export default class TodosList extends Component {
     componentDidMount() {
         axios.get('/expenses/getAllExpenses')
             .then(response => {
-				response.data.sort(function(a, b) {
+				temp = response.data;
+				temp.sort(function(a,b) {
 					return a.description > b.description;
 				});
-                this.setState({ todos: response.data });
+                this.setState({ todos: temp });
             })
             .catch(function (error){
                 console.log(error);
@@ -64,7 +67,11 @@ export default class TodosList extends Component {
             <div>
                 <h3><center>All Expenses</center></h3>
                 <h5>Total: ${this.state.total} </h5>
-                <table className="table table-striped" style={{ marginTop: 30 }} >
+                <table data-sort-name="description" 
+				  data-sort-order="desc" 
+				  className="table table-striped table-bordered" 
+				  style={{ marginTop: 30 }} >
+				  
                     <thead className="thead-dark">
                         <tr>
                             <th onClick={() => {this.onChangeSort('description')}}>Description</th>
