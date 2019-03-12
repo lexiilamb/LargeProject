@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 var temp = [];
+var i = 0;
+var sum = 0;
+var length = 0;
 
 const Expense = props => (
     <tr>
@@ -43,10 +46,11 @@ export default class TodosList extends Component {
     }
 	
 	onChangeSort(sort) {
-		this.state.todos.sort(function(a, b) {
+		temp = this.state.todos;
+		temp.sort(function(a, b) {
 			return a.sort > b.sort;
 		});
-		
+		this.setState({ todos: temp });
 		console.log(sort);
     }
 
@@ -57,9 +61,12 @@ export default class TodosList extends Component {
     }
 	
 	totalAmount(listOfExpenses) {
-		for(this.state.i = 0; this.state.i <this.state.todos.length; this.state.i++)
-			this.state.sum += this.state.todos[this.state.i].amount;
-		
+		i = 0;
+		sum = 0;
+		length = this.state.todos.length;
+		for(i; i <length; i++)
+			sum += this.state.todos[this.state.i].amount;
+		this.setState({ total: sum });
 	}
 
     render() {	
