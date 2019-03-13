@@ -39,7 +39,7 @@ export default class TodosList extends Component {
         axios.get('/expenses/getAllExpenses')
             .then(response => {
 				temp = response.data;
-				temp = sortBy(temp, 'description');
+				temp = sortBy(temp, 'description', 'amount');
                 this.setState({ todos: temp });
             })
             .catch(function (error){
@@ -54,7 +54,7 @@ export default class TodosList extends Component {
 		console.log(temp);
     }
 
-    todoList() {
+    listOfExpenses() {
         return this.state.todos.map(function(currentExpense, i){
             return <Expense item={currentExpense} key={i} />;
         })
@@ -77,9 +77,7 @@ export default class TodosList extends Component {
             <div>
                 <h3><center>All Expenses</center></h3>
                 <h5>Total: ${this.state.total} </h5>
-                <table data-sort-name="description" 
-				  data-sort-order="desc" 
-				  className="table table-striped table-bordered" 
+                <table className="table table-striped table-bordered" 
 				  style={{ marginTop: 30 }} >
 				  
                     <thead className="thead-dark">
@@ -103,7 +101,7 @@ export default class TodosList extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        { this.todoList() }
+                        { this.listOfExpenses() }
                     </tbody>
                 </table>
             </div>

@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import logo from "../krabs.gif";
 
+var temp = [];
+var i = 0;
+var sum = 1;
+var length = 0;
+
 const Expense = props => (
     <tr>
         <td>{props.item.description}</td>
@@ -22,9 +27,24 @@ export default class TodosList extends Component {
         super(props);
 		
 		this.onChangeMonth = this.onChangeMonth.bind(this);
+		this.onChangeSort = this.onChangeSort.bind(this);
 		
         this.state = {
-			todos: []};
+			todos: [],
+			total: = 0
+		};
+    }
+	
+	componentDidMount() {		
+        axios.get('/expenses/month/'+'Jan')
+            .then(response => {
+				temp = response.data;
+				temp = sortBy(temp, 'description', 'amount');
+                this.setState({ todos: temp });
+            })
+            .catch(function (error){
+                console.log(error);
+            })
     }
 	
 	onChangeMonth(month) {
@@ -37,15 +57,12 @@ export default class TodosList extends Component {
                 console.log(error);
             })
     }
-
-    componentDidMount() {		
-        axios.get('/expenses/month/'+'Jan')
-            .then(response => {
-                this.setState({ todos: response.data });
-            })
-            .catch(function (error){
-                console.log(error);
-            })
+	
+	onChangeSort(sortItem) {
+		temp = this.state.todos;
+		temp = sortBy(temp, sortItem);
+		this.setState({ todos: temp });
+		console.log(temp);
     }
 
     listOfExpenses() {
@@ -57,7 +74,8 @@ export default class TodosList extends Component {
     render() {
         return (
             <div>
-                <h3><center><img src={logo} width="150" height="75" alt=""/>	Monthly Lists	<img src={logo} width="150" height="75" alt="" /></center></h3>
+              <h3><center><img src={logo} width="150" height="75" alt=""/>	Monthly Lists	<img src={logo} width="150" height="75" alt="" /></center></h3>
+			  <h5>Total: ${this.state.total} </h5>
 				<div className="container">
 				  <nav className="navbar navbar-expand-lg navbar-light bg-light">
 					<div className="collpase navbar-collapse">
@@ -78,14 +96,26 @@ export default class TodosList extends Component {
 					</div>
 				  </nav>
 				</div>
-                <table className="table table-striped table-bordered" style={{ marginTop: 30 }} >
+                <table className="table table-striped table-bordered" 
+				  style={{ marginTop: 30 }} >
+				  
                     <thead className="thead-dark">
                         <tr>
-                            <th>Description</th>
-                            <th>Amount</th>
-                            <th>Month</th>
-                            <th>Day</th>
-                            <th>Year</th>
+                            <th data-field="description" 
+								onClick={() => {this.onChangeSort('description')}
+								}>Description</th>
+                            <th data-field="amount" 
+								onClick={() => {this.onChangeSort('amount')}
+								}>Amount</th>
+                            <th data-field="month" 
+								onClick={() => {this.onChangeSort('month')}
+								}>Month</th>
+                            <th data-field="day" 
+								onClick={() => {this.onChangeSort('day')}
+								}>Day</th>
+                            <th data-field="year" 
+								onClick={() => {this.onChangeSort('year')}
+								}>Year</th>
                             <th>Action</th>
                         </tr>
                     </thead>
