@@ -82,11 +82,21 @@ export default class TodosList extends Component {
 				  
                     <thead className="thead-dark">
                         <tr>
-                            <th onClick={() => {this.onChangeSort('description')}}>Description</th>
-                            <th onClick={() => {this.onChangeSort('amount')}}>Amount</th>
-                            <th onClick={() => {this.onChangeSort('month')}}>Month</th>
-                            <th onClick={() => {this.onChangeSort('day')}}>Day</th>
-                            <th onClick={() => {this.onChangeSort('year')}}>Year</th>
+                            <th data-field="description" 
+								onClick={() => {this.onChangeSort('description')}
+								}>Description</th>
+                            <th data-field="amount" 
+								onClick={() => {this.onChangeSort('amount')}
+								}>Amount</th>
+                            <th data-field="month" 
+								onClick={() => {this.onChangeSort('month')}
+								}>Month</th>
+                            <th data-field="day" 
+								onClick={() => {this.onChangeSort('day')}
+								}>Day</th>
+                            <th data-field="year" 
+								onClick={() => {this.onChangeSort('year')}
+								}>Year</th>
                             <th>Action</th>
                         </tr>
                     </thead>
