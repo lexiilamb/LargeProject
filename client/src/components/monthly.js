@@ -37,7 +37,7 @@ export default class TodosList extends Component {
 	
 	componentDidMount() {		
         axios.get('/expenses/month/'+'Jan')
-            ..then(response => {
+            .then(response => {
 				temp = response.data;
 				temp = sortBy(temp, ['description', 'amount']);
 				sum = sumBy(temp, 'amount');
