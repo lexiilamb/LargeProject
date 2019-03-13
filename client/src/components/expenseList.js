@@ -26,7 +26,6 @@ export default class TodosList extends Component {
         super(props);
 		
 		this.onChangeSort = this.onChangeSort.bind(this);
-		this.totalAmount = this.totalAmount.bind(this);
 		
         this.state = {
 			todos: [],
