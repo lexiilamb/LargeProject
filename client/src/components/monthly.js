@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import sortBy from 'lodash/sortBy';
 import logo from "../krabs.gif";
 
 var temp = [];
