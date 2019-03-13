@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import sortBy from 'lodash/sortBy';
 
 var temp = [];
 var i = 0;
@@ -37,18 +38,18 @@ export default class TodosList extends Component {
     componentDidMount() {
         axios.get('/expenses/getAllExpenses')
             .then(response => {
-                this.setState({ todos: response.data });
+				temp = response.data;
+				temp = sortBy(temp, 'description');
+                this.setState({ todos: temp });
             })
             .catch(function (error){
                 console.log(error);
             })
     }
 	
-	onChangeSort(sort) {
+	onChangeSort(sortItem) {
 		temp = this.state.todos;
-		temp.sort(function(a, b) {
-			return a.sort > b.sort;
-		});
+		temp = sortBy(temp, sortItem);
 		this.setState({ todos: temp });
 		console.log(temp);
     }
