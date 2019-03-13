@@ -4,7 +4,7 @@ import axios from 'axios';
 
 var temp = [];
 var i = 0;
-var sum = 0;
+var sum = 1;
 var length = 0;
 
 const Expense = props => (
@@ -26,19 +26,14 @@ export default class TodosList extends Component {
         super(props);
         this.state = {
 			todos: [],
-			total: 0,
-			i: 0
+			total: 2
 		};
     }
 
     componentDidMount() {
         axios.get('/expenses/getAllExpenses')
             .then(response => {
-				temp = response.data;
-				temp.sort(function(a,b) {
-					return a.description > b.description;
-				});
-                this.setState({ todos: temp });
+                this.setState({ todos: response.data });
             })
             .catch(function (error){
                 console.log(error);
@@ -62,10 +57,10 @@ export default class TodosList extends Component {
 	
 	totalAmount(listOfExpenses) {
 		i = 0;
-		sum = 0;
+		sum = 1;
 		length = this.state.todos.length;
 		for(i; i <length; i++)
-			sum += this.state.todos[this.state.i].amount;
+			sum += this.state.todos[i].amount;
 		this.setState({ total: sum });
 		console.log(sum);
 	}
