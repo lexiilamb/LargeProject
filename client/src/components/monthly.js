@@ -83,11 +83,11 @@ export default class TodosList extends Component {
 					  <ul className="navbar-nav mr-auto">
 						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Jan')}}>Jan</button>
 						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Feb')}}>Feb</button>
-						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('March')}}>March</button>
-						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('April')}}>April</button>
+						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Mar')}}>Mar</button>
+						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Apr')}}>Apr</button>
 						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('May')}}>May</button>
-						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('June')}}>June</button>
-						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('July')}}>July</button>
+						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Jun')}}>Jun</button>
+						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Jul')}}>Jul</button>
 						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Aug')}}>Aug</button>
 						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Sep')}}>Sep</button>
 						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Oct')}}>Oct</button>
