@@ -24,6 +24,11 @@ export default class TodosList extends Component {
 
     constructor(props) {
         super(props);
+		
+		this.onChangeSort = this.onChangeSort.bind(this);
+		this.totalAmount = this.totalAmount.bind(this);
+		this.onSubmit = this.onSubmit.bind(this);
+		
         this.state = {
 			todos: [],
 			total: 2
@@ -58,18 +63,20 @@ export default class TodosList extends Component {
 	totalAmount(listOfExpenses) {
 		i = 0;
 		sum = 1;
-		length = this.state.todos.length;
+		length = listOfExpenses.length;
 		for(i; i <length; i++)
-			sum += this.state.todos[i].amount;
+			sum += listOfExpenses[i].amount;
 		this.setState({ total: sum });
 		console.log(sum);
+		
+		return sum;
 	}
 
     render() {	
         return (
             <div>
                 <h3><center>All Expenses</center></h3>
-                <h5>Total: ${this.state.total} </h5>
+                <h5>Total: ${totalAmount(this.state.todos)} </h5>
                 <table data-sort-name="description" 
 				  data-sort-order="desc" 
 				  className="table table-striped table-bordered" 
