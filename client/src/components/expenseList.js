@@ -27,7 +27,6 @@ export default class TodosList extends Component {
 		
 		this.onChangeSort = this.onChangeSort.bind(this);
 		this.totalAmount = this.totalAmount.bind(this);
-		this.onSubmit = this.onSubmit.bind(this);
 		
         this.state = {
 			todos: [],
