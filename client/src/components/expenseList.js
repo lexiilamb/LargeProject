@@ -75,7 +75,7 @@ export default class TodosList extends Component {
         return (
             <div>
                 <h3><center>All Expenses</center></h3>
-                <h5>Total: ${this.state.total()} </h5>
+                <h5>Total: ${this.state.total} </h5>
                 <table data-sort-name="description" 
 				  data-sort-order="desc" 
 				  className="table table-striped table-bordered" 
