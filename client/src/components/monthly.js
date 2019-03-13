@@ -90,7 +90,7 @@ export default class TodosList extends Component {
               <h3><center><img src={logo} width="150" height="75" alt=""/>	Monthly Lists	<img src={logo} width="150" height="75" alt="" /></center></h3>
 			  <h5>Total: ${this.state.total} </h5>
 				<div className="container">
-				  <nav className="navbar navbar-expand-lg navbar-light bg-light">
+				  <nav className="navbar navbar-expand-sm navbar-light bg-light">
 					<div className="collpase navbar-collapse">
 					  <ul className="navbar-nav mr-auto">
 						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Jan')}}>Jan</button>
