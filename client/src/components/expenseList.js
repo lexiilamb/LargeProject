@@ -39,7 +39,7 @@ export default class TodosList extends Component {
         axios.get('/expenses/getAllExpenses')
             .then(response => {
 				temp = response.data;
-				temp = sortBy(temp, 'description', 'amount');
+				temp = sortBy(temp, ['description', 'amount']).reverse();
                 this.setState({ todos: temp });
             })
             .catch(function (error){
@@ -49,7 +49,7 @@ export default class TodosList extends Component {
 	
 	onChangeSort(sortItem) {
 		temp = this.state.todos;
-		temp = sortBy(temp, sortItem);
+		temp = sortBy(temp, sortItem).reverse();
 		this.setState({ todos: temp });
 		console.log(temp);
     }
