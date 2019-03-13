@@ -55,7 +55,13 @@ export default class TodosList extends Component {
 		console.log(month);
         axios.get('expenses/month/'+month)
             .then(response => {
-                this.setState({ todos: response.data });
+				temp = response.data;
+				temp = sortBy(temp, ['description', 'amount']);
+				sum = sumBy(temp, 'amount');
+                this.setState({ 
+					todos: temp,
+					total: sum
+				});
             })
             .catch(function (error){
                 console.log(error);
