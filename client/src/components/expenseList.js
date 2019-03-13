@@ -60,12 +60,12 @@ export default class TodosList extends Component {
         })
     }
 	
-	totalAmount(listOfExpenses) {
+	totalAmount() {
 		i = 0;
 		sum = 1;
-		length = listOfExpenses.length;
+		length = this.state.todos.length;
 		for(i; i <length; i++)
-			sum += listOfExpenses[i].amount;
+			sum += this.state.todos[i].amount;
 		this.setState({ total: sum });
 		console.log(sum);
 		
@@ -76,7 +76,7 @@ export default class TodosList extends Component {
         return (
             <div>
                 <h3><center>All Expenses</center></h3>
-                <h5>Total: ${totalAmount(this.state.todos)} </h5>
+                <h5>Total: ${this.totalAmount()} </h5>
                 <table data-sort-name="description" 
 				  data-sort-order="desc" 
 				  className="table table-striped table-bordered" 
