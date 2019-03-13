@@ -5,9 +5,7 @@ import sortBy from 'lodash/sortBy';
 import sumBy from 'lodash/sumBy';
 
 var temp = [];
-var i = 0;
 var sum = 0;
-var length = 0;
 
 const Expense = props => (
     <tr>
@@ -60,7 +58,6 @@ export default class TodosList extends Component {
 					todos: temp,
 					total: sum
 				});
-		console.log(temp);
     }
 
     listOfExpenses() {
@@ -68,18 +65,6 @@ export default class TodosList extends Component {
             return <Expense item={currentExpense} key={i} />;
         })
     }
-	
-	totalAmount() {
-		i = 0;
-		sum = 1;
-		length = this.state.todos.length;
-		for(i; i <length; i++)
-			sum += this.state.todos[i].amount;
-		this.setState({ total: sum });
-		console.log(sum);
-		
-		return sum;
-	}
 
     render() {	
         return (

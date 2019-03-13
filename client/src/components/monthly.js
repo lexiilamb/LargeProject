@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import sortBy from 'lodash/sortBy';
+import sumBy from 'lodash/sumBy';
 import logo from "../krabs.gif";
 
 var temp = [];
-var i = 0;
-var sum = 1;
-var length = 0;
+var sum = 0;
 
 const Expense = props => (
     <tr>
@@ -41,8 +40,11 @@ export default class TodosList extends Component {
             .then(response => {
 				temp = response.data;
 				temp = sortBy(temp, ['description', 'amount']);
-                this.setState({ todos: temp });
-            })
+				sum = sumBy(temp, 'amount');
+                this.setState({ 
+					todos: temp,
+					total: sum
+				});
             .catch(function (error){
                 console.log(error);
             })
@@ -62,8 +64,11 @@ export default class TodosList extends Component {
 	onChangeSort(sortItem) {
 		temp = this.state.todos;
 		temp = sortBy(temp, sortItem);
-		this.setState({ todos: temp });
-		console.log(temp);
+		sum = sumBy(temp, 'amount');
+		this.setState({ 
+					todos: temp,
+					total: sum
+				});
     }
 
     listOfExpenses() {
