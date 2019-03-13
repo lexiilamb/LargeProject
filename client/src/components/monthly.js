@@ -31,7 +31,7 @@ export default class TodosList extends Component {
 		
         this.state = {
 			todos: [],
-			total: = 0
+			total: 0
 		};
     }
 	
