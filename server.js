@@ -17,6 +17,31 @@ connection.once('open', function() {
     console.log("MongoDB database connection established successfully");
 })
 
+
+// POST route to return ALL contacts in the database.
+expenseRoutes.post("/all", (req, res, next) => {
+  const userId = req.body.userId;
+  Expense.find({userId: userId})
+  .exec()
+  .then(docs => {
+	    return {
+			expenseId = req.body.expenseId;
+			description = req.body.description;
+			amount = req.body.amount;
+			month = req.body.month;
+			day = req.body.day;
+			year = req.body.year;
+		}
+    res.status(200).json(response);
+  })
+  .catch(err => {
+	console.log(err);
+	res.status(500).json({
+  	  error: err
+	})
+  });
+});
+
 // Route to return ALL expenses in the database for a ALL users.
 expenseRoutes.route('/').get(function(req, res) {
     Expense.find(function(err, expenses) {
