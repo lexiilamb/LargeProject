@@ -19,20 +19,23 @@ connection.once('open', function() {
 
 
 // POST route to return ALL contacts in the database.
-expenseRoutes.post("/all", (req, res, next) => {
+expenseRoutes.post('/all', (req, res, next) => {
   const userId = req.body.userId;
   Expense.find({userId: userId})
+  .select("_id description amount month day year")
   .exec()
   .then(docs => {
-	    return {
-			expenseId = req.body.expenseId;
-			description = req.body.description;
-			amount = req.body.amount;
-			month = req.body.month;
-			day = req.body.day;
-			year = req.body.year;
-		}
-    res.status(200).json(response);
+	res.status(200).json(
+		docs.map(doc => {
+			return {
+				description: doc.description,
+				amount: doc.amount,
+				month: doc.month,
+				day: doc.day,
+				year: doc.year
+			}
+		})
+	);
   })
   .catch(err => {
 	console.log(err);
