@@ -30,19 +30,19 @@ export default class TodosList extends Component {
 		this.onChangeSort = this.onChangeSort.bind(this);
 		
         this.state = {
-			todos: [],
+			expensesArray: [],
 			total: 0
 		};
     }
 	
 	componentDidMount() {		
-        axios.get('/expenses/month/'+'Jan')
+        axios.get('/expenses/month/Jan')
             .then(response => {
 				temp = response.data;
 				temp = sortBy(temp, ['description', 'amount']);
 				sum = sumBy(temp, 'amount');
                 this.setState({ 
-					todos: temp,
+					expensesArray: temp,
 					total: sum
 				});
             })
@@ -59,7 +59,7 @@ export default class TodosList extends Component {
 				temp = sortBy(temp, ['description', 'amount']);
 				sum = sumBy(temp, 'amount');
                 this.setState({ 
-					todos: temp,
+					expensesArray: temp,
 					total: sum
 				});
             })
@@ -69,17 +69,17 @@ export default class TodosList extends Component {
     }
 	
 	onChangeSort(sortItem) {
-		temp = this.state.todos;
+		temp = this.state.expensesArray;
 		temp = sortBy(temp, sortItem);
 		sum = sumBy(temp, 'amount');
 		this.setState({ 
-					todos: temp,
+					expensesArray: temp,
 					total: sum
 				});
     }
 
     listOfExpenses() {
-        return this.state.todos.map(function(currentExpense, i){
+        return this.state.expensesArray.map(function(currentExpense, i){
             return <Expense item={currentExpense} key={i} />;
         })
     }

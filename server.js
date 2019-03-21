@@ -71,11 +71,24 @@ expenseRoutes.get("/getAllExpenses", (req, res, next) => {
 
 // Route to return all expenses for a specific month
 expenseRoutes.get("/month/:newMonth", (req, res, next) => {
-	console.log("In month route");
   const userId = "5c78ce86a484a23550339d6a";
   const month = req.params.newMonth;
   console.log(month);
   Expense.find({userId: userId, month: month}, function(err, expenses) {
+	console.log(expenses);
+	if (err) {
+		console.log(err);
+	} else {
+		res.json(expenses);
+	}
+  });
+});
+
+// Route to return all expenses with a specific group code
+expenseRoutes.get("/code/:thisCode", (req, res, next) => {
+  const groupCode = req.params.thisCode;
+  console.log(groupCode);
+  Expense.find({groupCode: groupCode}, function(err, expenses) {
 	console.log(expenses);
 	if (err) {
 		console.log(err);
