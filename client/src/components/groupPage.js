@@ -28,7 +28,6 @@ export default class TodosList extends Component {
 		
 		this.onChangeSort = this.onChangeSort.bind(this);
 		this.onChangeGroupCode = this.onChangeGroupCode.bind(this);
-		this.onSubmit = this.onSubmit.bind(this);
 		
         this.state = {
 			expensesArray: [],
@@ -80,17 +79,6 @@ export default class TodosList extends Component {
             })
     }
 	
-	onSubmit(e) {
-        e.preventDefault();
-		
-		const newCode = {
-            groupCode: this.state.groupCode
-        };
-
-        axios.post('/expenses/changeGroupCode', )
-            .then(res => console.log(res.data));
-	}
-	
 	
 
     listOfExpenses() {
@@ -104,7 +92,7 @@ export default class TodosList extends Component {
             <div>
               <h3><center><img src={logo} width="200" height="100" alt=""/>	Group Expenses <img src={logo} width="200" height="100" alt="" /></center></h3>
 			  
-			  <form onSubmit={this.onSubmit}>
+			  <form>
                         <label>GroupCode: </label>
                         <input  type="text"
                                 value={this.state.groupCode}
