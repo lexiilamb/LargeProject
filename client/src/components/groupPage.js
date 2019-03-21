@@ -28,16 +28,17 @@ export default class TodosList extends Component {
 		
 		this.onChangeSort = this.onChangeSort.bind(this);
 		this.onChangeGroupCode = this.onChangeGroupCode.bind(this);
+		this.onSubmit = this.onSubmit.bind(this);
 		
         this.state = {
 			expensesArray: [],
 			total: 0,
-			groupCode: ''
+			groupCode: ' '
 		};
     }
 	
 	componentDidMount() {		
-        axios.get('/expenses/code/8675308')
+        axios.get('/expenses/code/8675309')
             .then(response => {
 				temp = response.data;
 				temp = sortBy(temp, ['description', 'amount']);
@@ -62,9 +63,17 @@ export default class TodosList extends Component {
 				});
     }
 	
-	onChangeGroupCode(enteredCode) {
-		console.log(enteredCode);
-        axios.get('expenses/code/'+enteredCode)
+	onChangeGroupCode(e) {
+		this.setState({
+            groupCode: e.target.value
+        });
+        
+    }
+	
+	onSubmit(e) {
+        e.preventDefault();
+		
+		axios.get('expenses/code/'+this.state.groupCode)
             .then(response => {
 				temp = response.data;
 				temp = sortBy(temp, ['description', 'amount']);
@@ -77,8 +86,9 @@ export default class TodosList extends Component {
             .catch(function (error){
                 console.log(error);
             })
+			
+        alert('Returning expense with code: ' + this.state.groupCode);
     }
-	
 	
 
     listOfExpenses() {
@@ -92,16 +102,16 @@ export default class TodosList extends Component {
             <div>
               <h3><center><img src={logo} width="200" height="100" alt=""/>	Group Expenses <img src={logo} width="200" height="100" alt="" /></center></h3>
 			  
-			  <form>
-                        <label>GroupCode: </label>
-                        <input  type="text"
-                                value={this.state.groupCode}
-                                onChange={this.onChangeGroupCode}
-                                />
-                    <div className="form-group">
-                        <input type="submit" value="Update Group Code" className="btn btn-info" />
-                    </div>
-                </form>
+			  <form onSubmit={this.onSubmit}>
+				<label>GroupCode:
+					<input  type="text"
+						className="form-control"
+						value={this.state.cat}
+						onChange={this.onChangeGroupCode}
+						/>
+				</label>
+				<input type="submit" value="Update" className="btn btn-info" />
+			  </form>
 			  
 			  <h5>Total: ${this.state.total} </h5>
                 <table className="table table-striped table-bordered" 

@@ -11,7 +11,7 @@ const expenseSchema = new mongoose.Schema({
 	month: { type: String, required: true },
 	day: { type: Number, required: false },
 	year: { type: Number, required: true},
-	groupCode: { type: Number, required: false}
+	groupCode: { type: String, required: false}
 });
 
 module.exports = mongoose.model('Expense', expenseSchema);
