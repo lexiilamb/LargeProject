@@ -37,7 +37,7 @@ export default class TodosList extends Component {
     }
 	
 	componentDidMount() {		
-        axios.get('/expenses/month/Jan')
+        axios.get('/expenses/code/8675308')
             .then(response => {
 				temp = response.data;
 				temp = sortBy(temp, ['description', 'amount']);
