@@ -9,6 +9,8 @@ const path = require("path");
 const dotenv = require("dotenv").config();
 let Expense = require('./models/expense');
 
+var globalUserId = '';
+
 let User = require('./models/user');
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -58,6 +60,51 @@ expenseRoutes.route('/').get(function(req, res) {
             res.json(expenses);
         }
     });
+});
+
+// Login route
+expenseRoutes.post("/loginUser", (req, res, next) => {
+  User.find({username: req.body.username}).exec().then(user => {
+    if (user.length < 1) {
+      return res.status(401).json({
+      message: "Auth failed: no username entered"
+      });
+    }
+    bcrypt.compare(req.body.password, user[0].password, (err, result) => {
+      if (err) {
+        return res.status(401).json({
+        message: "Auth failed: password doesn't match"
+        });
+      }
+      if (result) {
+        const token = jwt.sign(
+        {
+          username: user[0].username,
+          userId: user[0]._id
+        },
+        process.env.JWT_KEY,
+        {
+          expiresIn: "1h"
+        });
+
+        return res.status(200).json({
+          message: "Auth successful: User is logged in",
+          username: user[0].username,
+          userId: user[0]._id,
+            //loggedIntoken: token
+        });
+      }
+      res.status(401).json({
+        message: "Auth failed"
+      });
+    });
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json({
+      error: err
+    });
+  });
 });
 
 // Add new user
