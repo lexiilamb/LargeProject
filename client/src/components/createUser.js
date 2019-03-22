@@ -90,7 +90,7 @@ export default class CreateUser extends Component {
 		
         return (
             <div style={{marginTop: 10}}>
-                <h3>Create New Expense</h3>
+                <h3>Create New User</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group"> 
                         <label>First Name: </label>
