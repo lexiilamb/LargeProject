@@ -9,9 +9,12 @@ const path = require("path");
 const dotenv = require("dotenv").config();
 let Expense = require('./models/expense');
 
+var globalUserId = '';
+
 let User = require('./models/user');
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -21,7 +24,6 @@ const connection = mongoose.connection;
 connection.once('open', function() {
     console.log("MongoDB database connection established successfully");
 })
-
 
 
 expenseRoutes.post("/createUser", (req, res, next) => {
@@ -71,6 +73,32 @@ expenseRoutes.post("/createUser", (req, res, next) => {
 
 
 // Route to return ALL expenses in the database for a ALL users.
+expenseRoutes.post('/all', (req, res, next) => {
+  const userId = req.body.userId;
+  Expense.find({userId: userId})
+  .select("_id description amount month day year")
+  .exec()
+  .then(docs => {
+	res.status(200).json(
+		docs.map(doc => {
+			return {
+				description: doc.description,
+				amount: doc.amount,
+				month: doc.month,
+				day: doc.day,
+				year: doc.year
+			}
+		})
+	);
+  })
+  .catch(err => {
+	console.log(err);
+	res.status(500).json({
+  	  error: err
+	})
+  });
+});
+
 expenseRoutes.route('/').get(function(req, res) {
     Expense.find(function(err, expenses) {
         if (err) {
@@ -78,6 +106,96 @@ expenseRoutes.route('/').get(function(req, res) {
         } else {
             res.json(expenses);
         }
+    });
+});
+
+// Login route
+expenseRoutes.post("/loginUser", (req, res, next) => {
+  User.find({username: req.body.username}).exec().then(user => {
+    if (user.length < 1) {
+      return res.status(401).json({
+      message: "Auth failed: no username entered"
+      });
+    }
+    bcrypt.compare(req.body.password, user[0].password, (err, result) => {
+      if (err) {
+        return res.status(401).json({
+        message: "Auth failed: password doesn't match"
+        });
+      }
+      if (result) {
+        const token = jwt.sign(
+        {
+          username: user[0].username,
+          userId: user[0]._id
+        },
+        process.env.JWT_KEY,
+        {
+          expiresIn: "1h"
+        });
+
+        return res.status(200).json({
+          message: "Auth successful: User is logged in",
+          username: user[0].username,
+          userId: user[0]._id,
+            //loggedIntoken: token
+        });
+      }
+      res.status(401).json({
+        message: "Auth failed"
+      });
+    });
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json({
+      error: err
+    });
+  });
+});
+
+// Add new user
+expenseRoutes.post("/createUser", (req, res, next) => {
+  User.find({ username: req.body.username })
+    .exec()
+    .then(user => {
+      if (user.length >= 1) {
+        return res.status(409).json({
+          message: "User already exists."
+        });
+      } else {
+        bcrypt.hash(req.body.password, 10, (err, hash) => {
+          if (err) {
+            return res.status(500).json({
+              error: err
+            });
+          } else {
+            const user = new User({
+              _id: new mongoose.Types.ObjectId(),
+              firstName: req.body.firstName,
+              lastName: req.body.lastName,
+              email: req.body.email,
+              username: req.body.username,
+              password: hash
+            });
+            user
+              .save()
+              .then(result => {
+                console.log(result);
+                res.status(201).json({
+                  _id: result._id,
+                  message: "User created"
+                });
+              })
+              .catch(err => {
+                console.log(err);
+                res.status(500).json({
+                  error: err
+                });
+              });
+          }
+        });
+      }
     });
 });
 
@@ -96,11 +214,24 @@ expenseRoutes.get("/getAllExpenses", (req, res, next) => {
 
 // Route to return all expenses for a specific month
 expenseRoutes.get("/month/:newMonth", (req, res, next) => {
-	console.log("In month route");
   const userId = "5c78ce86a484a23550339d6a";
   const month = req.params.newMonth;
   console.log(month);
   Expense.find({userId: userId, month: month}, function(err, expenses) {
+	console.log(expenses);
+	if (err) {
+		console.log(err);
+	} else {
+		res.json(expenses);
+	}
+  });
+});
+
+// Route to return all expenses with a specific group code
+expenseRoutes.get("/code/:thisCode", (req, res, next) => {
+  const groupCode = req.params.thisCode;
+  console.log(groupCode);
+  Expense.find({groupCode: groupCode}, function(err, expenses) {
 	console.log(expenses);
 	if (err) {
 		console.log(err);
@@ -140,6 +271,7 @@ expenseRoutes.route('/update/:id').post(function(req, res) {
             expense.month = req.body.month;
             expense.day = req.body.day;
             expense.year = req.body.year;
+            expense.groupCode = req.body.groupCode;
             expense.save().then(expense => {
                 res.json('Expense updated!');
             })

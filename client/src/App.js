@@ -9,6 +9,7 @@ import ExpensesList from "./components/expenseList";
 import CreateExpense from "./components/createExpense";
 import EditExpense from "./components/editExpense";
 import Monthly from "./components/monthly";
+import Group from "./components/groupPage";
 
 import logo from "./giphy.gif";
 
@@ -31,6 +32,9 @@ class App extends Component {
 				<li className="navbar-item">
                   <Link to="/monthly" className="nav-link">Monthly</Link>
                 </li>
+				<li className="navbar-item">
+                  <Link to="/group" className="nav-link">Group</Link>
+                </li>
               </ul>
             </div>
 			<img src={logo} width="100" height="100" alt=""/>
@@ -41,6 +45,7 @@ class App extends Component {
           <Route path="/create" component={CreateExpense} />
 		  <Route path="/edit/:id" component={EditExpense} />
 		  <Route path="/monthly" component={Monthly} />
+		  <Route path="/group" component={Group} />
         </div>
       </Router>
     );
