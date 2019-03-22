@@ -8,6 +8,12 @@ const PORT = process.env.PORT || 4000; // "process.env.PORT" is Heroku's port if
 const path = require("path");
 const dotenv = require("dotenv").config();
 let Expense = require('./models/expense');
+
+let User = require('./models/user');
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "client", "build")))
@@ -18,7 +24,6 @@ connection.once('open', function() {
 })
 
 
-// POST route to return ALL contacts in the database.
 expenseRoutes.post('/all', (req, res, next) => {
   const userId = req.body.userId;
   Expense.find({userId: userId})
@@ -45,7 +50,6 @@ expenseRoutes.post('/all', (req, res, next) => {
   });
 });
 
-// Route to return ALL expenses in the database for a ALL users.
 expenseRoutes.route('/').get(function(req, res) {
     Expense.find(function(err, expenses) {
         if (err) {
@@ -53,6 +57,51 @@ expenseRoutes.route('/').get(function(req, res) {
         } else {
             res.json(expenses);
         }
+    });
+});
+
+// Add new user
+expenseRoutes.post("/createUser", (req, res, next) => {
+  User.find({ username: req.body.username })
+    .exec()
+    .then(user => {
+      if (user.length >= 1) {
+        return res.status(409).json({
+          message: "User already exists."
+        });
+      } else {
+        bcrypt.hash(req.body.password, 10, (err, hash) => {
+          if (err) {
+            return res.status(500).json({
+              error: err
+            });
+          } else {
+            const user = new User({
+              _id: new mongoose.Types.ObjectId(),
+              firstName: req.body.firstName,
+              lastName: req.body.lastName,
+              email: req.body.email,
+              username: req.body.username,
+              password: hash
+            });
+            user
+              .save()
+              .then(result => {
+                console.log(result);
+                res.status(201).json({
+                  _id: result._id,
+                  message: "User created"
+                });
+              })
+              .catch(err => {
+                console.log(err);
+                res.status(500).json({
+                  error: err
+                });
+              });
+          }
+        });
+      }
     });
 });
 
