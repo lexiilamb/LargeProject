@@ -26,7 +26,6 @@ connection.once('open', function() {
 })
 
 // For mobile testing
-// Route to return ALL expenses in the database for a ALL users.
 expenseRoutes.post('/all', (req, res, next) => {
   const userId = req.body.userId;
   Expense.find({userId: userId})
