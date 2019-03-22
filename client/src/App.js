@@ -40,8 +40,7 @@ class App extends Component {
 			<img src={logo} width="100" height="100" alt=""/>
           </nav>
           <br/>
-		  <Route path="/register" exact component={CreateUser} />
-		  <Route path="/" exact component={ExpensesList} />
+		  <Route path="/home" exact component={ExpensesList} />
           <Route path="/create" component={CreateExpense} />
 		  <Route path="/edit/:id" component={EditExpense} />
 		  <Route path="/monthly" component={Monthly} />
