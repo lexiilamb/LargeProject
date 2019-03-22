@@ -25,53 +25,7 @@ connection.once('open', function() {
     console.log("MongoDB database connection established successfully");
 })
 
-
-expenseRoutes.post("/createUser", (req, res, next) => {
-  User.find({ username: req.body.username })
-    .exec()
-    .then(user => {
-      if (user.length >= 1) {
-        return res.status(409).json({
-          message: "User already exists."
-        });
-      } else {
-        bcrypt.hash(req.body.password, 10, (err, hash) => {
-          if (err) {
-            return res.status(500).json({
-              error: err
-            });
-          } else {
-            const user = new User({
-              _id: new mongoose.Types.ObjectId(),
-              firstName: req.body.firstName,
-              lastName: req.body.lastName,
-              email: req.body.email,
-              username: req.body.username,
-              password: hash
-            });
-            user
-              .save()
-              .then(result => {
-                console.log(result);
-                res.status(201).json({
-                  _id: result._id,
-                  message: "User created"
-                });
-              })
-              .catch(err => {
-                console.log(err);
-                res.status(500).json({
-                  error: err
-                });
-              });
-          }
-        });
-      }
-    });
-});
-
-
-
+// For mobile testing
 // Route to return ALL expenses in the database for a ALL users.
 expenseRoutes.post('/all', (req, res, next) => {
   const userId = req.body.userId;
@@ -98,7 +52,7 @@ expenseRoutes.post('/all', (req, res, next) => {
 	})
   });
 });
-
+// For mobile testing
 expenseRoutes.route('/').get(function(req, res) {
     Expense.find(function(err, expenses) {
         if (err) {
