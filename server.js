@@ -25,7 +25,7 @@ connection.once('open', function() {
     console.log("MongoDB database connection established successfully");
 })
 
-
+// For mobile testing
 expenseRoutes.post('/all', (req, res, next) => {
   const userId = req.body.userId;
   Expense.find({userId: userId})
@@ -51,7 +51,7 @@ expenseRoutes.post('/all', (req, res, next) => {
 	})
   });
 });
-
+// For mobile testing
 expenseRoutes.route('/').get(function(req, res) {
     Expense.find(function(err, expenses) {
         if (err) {
