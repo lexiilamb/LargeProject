@@ -80,7 +80,7 @@ export default class CreateUser extends Component {
                         <input type="submit" value="Login" className="btn btn-success" />
                     </div>
                 </form>
-				<h5><center>New User?</center></h5>
+				<h5>New User?</h5>
 				<button className="btn btn-success">
 					<Link to="/register" className="nav-link">
 						Register
