@@ -26,29 +26,28 @@ connection.once('open', function() {
 })
 
 // For mobile testing
-expenseRoutes.post('/all', (req, res, next) => {
+expenseRoutes.post("/all", (req, res, next) => {
   const userId = req.body.userId;
-  Expense.find({userId: userId})
-  .select("_id description amount month day year")
-  .exec()
-  .then(docs => {
-	res.status(200).json(
-		docs.map(doc => {
-			return {
-				description: doc.description,
-				amount: doc.amount,
-				month: doc.month,
-				day: doc.day,
-				year: doc.year
-			}
-		})
-	);
-  })
-  .catch(err => {
-	console.log(err);
-	res.status(500).json({
-  	  error: err
-	})
+  Expense.find({userId: userId}, function(err, expenses) {
+	
+	if (err) {
+		console.log(err);
+	} else {
+		res.json(expenses);
+	}
+  });
+});
+expenseRoutes.post("/monthMobile/:newMonth", (req, res, next) => {
+  const userId = "5c78ce86a484a23550339d6a";
+  const month = req.params.newMonth;
+  console.log(month);
+  Expense.find({userId: userId, month: month}, function(err, expenses) {
+	console.log(expenses);
+	if (err) {
+		console.log(err);
+	} else {
+		res.json(expenses);
+	}
   });
 });
 // For mobile testing
