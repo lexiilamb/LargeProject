@@ -8,6 +8,7 @@ const expenseSchema = new mongoose.Schema({
     },
 	description: { type: String, required: true },
 	amount: { type: Number, required: true },
+	category: { type: String, required: false },
 	month: { type: String, required: true },
 	day: { type: Number, required: false },
 	year: { type: Number, required: true},

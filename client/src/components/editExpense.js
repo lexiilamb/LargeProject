@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import Select from 'react-select';
 import axios from 'axios';
 
+const optionsCategory = [
+  { value: 'Food', label: 'Food' },
+  { value: 'Bills', label: 'Bills' },
+  { value: 'Entertainment', label: 'Entertainment' },
+  { value: 'Other', label: 'Other/Misc.' }
+];
+
 const optionsMonth = [
   { value: 'Jan', label: 'Jan' },
   { value: 'Feb', label: 'Feb' },
@@ -58,6 +65,7 @@ export default class EditExpense extends Component {
 
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeAmount = this.onChangeAmount.bind(this);
+		this.onChangeCategory = this.onChangeCategory.bind(this);
 		this.onChangeMonth = this.onChangeMonth.bind(this);
 		this.onChangeDay = this.onChangeDay.bind(this);
 		this.onChangeYear = this.onChangeYear.bind(this);
@@ -68,6 +76,7 @@ export default class EditExpense extends Component {
         this.state = {
             description: '',
             amount: '',
+            category: '',
             month: '',
             day: '',
             year: '',
@@ -81,6 +90,7 @@ export default class EditExpense extends Component {
                 this.setState({
                     description: response.data.description,
                     amount: response.data.amount,
+                    category: response.data.category,
 					month: response.data.month,
 					day: response.data.day,
 					year: response.data.year,
@@ -101,6 +111,12 @@ export default class EditExpense extends Component {
     onChangeAmount(e) {
         this.setState({
             amount: e.target.value
+        });
+    }
+	
+	onChangeCategory(selectedCategory) {
+        this.setState({
+            category: selectedCategory.value
         });
     }
 	
@@ -133,6 +149,7 @@ export default class EditExpense extends Component {
         const obj = {
             description: this.state.description,
             amount: this.state.amount,
+            category: this.state.category,
             month: this.state.month,
             day: this.state.day,
             year: this.state.year,
@@ -152,6 +169,7 @@ export default class EditExpense extends Component {
     }
 
     render() {
+		const { selectedCategory } = this.state;
 		const { selectedMonth } = this.state;
 		const { selectedDay } = this.state;
 	
@@ -176,6 +194,16 @@ export default class EditExpense extends Component {
                                 onChange={this.onChangeAmount}
                                 />
                     </div>
+					<div className="form-group">
+					  <label>Category: </label>
+					  <Select
+						name="Category"
+						placeholder={this.state.category}
+						value={selectedCategory}
+						options={optionsCategory}
+						onChange={this.onChangeCategory}
+					  />
+					</div>
 					<div className="form-group">
 					  <label>Month: </label>
 					  <Select
