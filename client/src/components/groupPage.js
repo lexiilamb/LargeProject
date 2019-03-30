@@ -38,7 +38,7 @@ export default class TodosList extends Component {
     }
 	
 	componentDidMount() {		
-        axios.get('/expenses/code/8675309')
+        axios.post('/expenses/code/8675309')
             .then(response => {
 				temp = response.data;
 				temp = sortBy(temp, ['description', 'amount']);
@@ -73,7 +73,7 @@ export default class TodosList extends Component {
 	onSubmit(e) {
         e.preventDefault();
 		
-		axios.get('expenses/code/'+this.state.groupCode)
+		axios.post('expenses/code/'+this.state.groupCode)
             .then(response => {
 				temp = response.data;
 				temp = sortBy(temp, ['description', 'amount']);
@@ -86,8 +86,6 @@ export default class TodosList extends Component {
             .catch(function (error){
                 console.log(error);
             })
-			
-        alert('Returning expense with code: ' + this.state.groupCode);
     }
 	
 

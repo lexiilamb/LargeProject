@@ -36,7 +36,7 @@ export default class TodosList extends Component {
     }
 	
 	componentDidMount() {		
-        axios.get('/expenses/month/Jan')
+        axios.post('/expenses/month/Jan')
             .then(response => {
 				temp = response.data;
 				temp = sortBy(temp, ['description', 'amount']);
@@ -52,8 +52,7 @@ export default class TodosList extends Component {
     }
 	
 	onChangeMonth(month) {
-		console.log(month);
-        axios.get('expenses/month/'+month)
+        axios.post('expenses/month/'+month)
             .then(response => {
 				temp = response.data;
 				temp = sortBy(temp, ['description', 'amount']);

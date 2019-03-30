@@ -26,29 +26,29 @@ connection.once('open', function() {
 })
 
 // For mobile testing
-expenseRoutes.post('/all', (req, res, next) => {
+expenseRoutes.post("/all", (req, res, next) => {
   const userId = req.body.userId;
-  Expense.find({userId: userId})
-  .select("_id description amount month day year")
-  .exec()
-  .then(docs => {
-	res.status(200).json(
-		docs.map(doc => {
-			return {
-				description: doc.description,
-				amount: doc.amount,
-				month: doc.month,
-				day: doc.day,
-				year: doc.year
-			}
-		})
-	);
-  })
-  .catch(err => {
-	console.log(err);
-	res.status(500).json({
-  	  error: err
-	})
+  Expense.find({userId: userId}, function(err, expenses) {
+	
+	if (err) {
+		console.log(err);
+	} else {
+		res.json(expenses);
+	}
+  });
+});
+// For mobile testing
+expenseRoutes.post("/monthMobile/:newMonth", (req, res, next) => {
+  const userId = "5c78ce86a484a23550339d6a";
+  const month = req.params.newMonth;
+  console.log(month);
+  Expense.find({userId: userId, month: month}, function(err, expenses) {
+	console.log(expenses);
+	if (err) {
+		console.log(err);
+	} else {
+		res.json(expenses);
+	}
   });
 });
 // For mobile testing
@@ -153,7 +153,7 @@ expenseRoutes.post("/createUser", (req, res, next) => {
 });
 
 // Route to return ALL expenses in the database for a specific user.
-expenseRoutes.get("/getAllExpenses", (req, res, next) => {
+expenseRoutes.post("/getAllExpenses", (req, res, next) => {
   const userId = "5c78ce86a484a23550339d6a";
   Expense.find({userId: userId}, function(err, expenses) {
 	
@@ -166,7 +166,7 @@ expenseRoutes.get("/getAllExpenses", (req, res, next) => {
 });
 
 // Route to return all expenses for a specific month
-expenseRoutes.get("/month/:newMonth", (req, res, next) => {
+expenseRoutes.post("/month/:newMonth", (req, res, next) => {
   const userId = "5c78ce86a484a23550339d6a";
   const month = req.params.newMonth;
   console.log(month);
@@ -181,7 +181,7 @@ expenseRoutes.get("/month/:newMonth", (req, res, next) => {
 });
 
 // Route to return all expenses with a specific group code
-expenseRoutes.get("/code/:thisCode", (req, res, next) => {
+expenseRoutes.post("/code/:thisCode", (req, res, next) => {
   const groupCode = req.params.thisCode;
   console.log(groupCode);
   Expense.find({groupCode: groupCode}, function(err, expenses) {
@@ -195,7 +195,7 @@ expenseRoutes.get("/code/:thisCode", (req, res, next) => {
 });
 
 // Route to return specific expense in database.
-expenseRoutes.route('/:id').get(function(req, res) {
+expenseRoutes.route('/:id').post(function(req, res) {
     let id = req.params.id;
     Expense.findById(id, function(err, expense) {
         res.json(expense);

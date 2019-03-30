@@ -76,7 +76,7 @@ export default class EditExpense extends Component {
     }
 
     componentDidMount() {
-        axios.get('/expenses/'+this.props.match.params.id)
+        axios.post('/expenses/'+this.props.match.params.id)
             .then(response => {
                 this.setState({
                     description: response.data.description,
@@ -138,18 +138,17 @@ export default class EditExpense extends Component {
             year: this.state.year,
             groupCode: this.state.groupCode
         };
-        console.log(obj);
         axios.post('/expenses/update/'+this.props.match.params.id, obj)
             .then(res => console.log(res.data));
         
-        this.props.history.push('/');
+        this.props.history.push('/home');
     }
 	
 	deleteExpense() {	
         axios.delete('/expenses/delete/'+this.props.match.params.id)
             .then(res => console.log(res.data));
         
-        this.props.history.push('/');
+        this.props.history.push('/home');
     }
 
     render() {

@@ -1,5 +1,32 @@
 ## Testing with POSTMAN or ARC
 
+### Create a new user
+GET request: https://trackdatcash.herokuapp.com/expenses/createUser
+<br/>Input:
+```
+{
+  "firstName" : "First",
+  "lastName" : "Last",
+  "email" : "example@example.com",
+  "username" : "example",
+  "password" : "example"
+}
+```
+Output:
+<br/>- 
+
+### Login with a user
+GET request: https://trackdatcash.herokuapp.com/expenses/loginUser
+<br/>Input:
+```
+{
+  "username" : "example",
+  "password" : "example"
+}
+```
+Output:
+<br/>- 
+
 ### Get ALL expenses in database
 GET request: https://trackdatcash.herokuapp.com/expenses/
 <br/>Input:
