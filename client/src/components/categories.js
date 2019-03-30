@@ -96,7 +96,7 @@ export default class TodosList extends Component {
 						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeCategory('Food')}}>Food</button>
 						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeCategory('Bills')}}>Bills</button>
 						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeCategory('Entertainment')}}>Entertainment</button>
-						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeCategory('Others/Misc.')}}>Others/Misc.</button>
+						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeCategory('Other')}}>Other/Misc.</button>
 					  </ul>
 					</div>
 				  </nav>

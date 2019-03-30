@@ -6,7 +6,7 @@ const optionsCategory = [
   { value: 'Food', label: 'Food' },
   { value: 'Bills', label: 'Bills' },
   { value: 'Entertainment', label: 'Entertainment' },
-  { value: 'Other/Misc.', label: 'Other/Misc.' }
+  { value: 'Other', label: 'Other/Misc.' }
 ];
 
 const optionsMonth = [
