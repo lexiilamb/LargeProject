@@ -236,6 +236,7 @@ expenseRoutes.route('/update/:id').post(function(req, res) {
         else
             expense.description = req.body.description;
             expense.amount = req.body.amount;
+            expense.category = req.body.category;
             expense.month = req.body.month;
             expense.day = req.body.day;
             expense.year = req.body.year;
