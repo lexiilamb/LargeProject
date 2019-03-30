@@ -27,7 +27,7 @@ export default class TodosList extends Component {
     constructor(props) {
         super(props);
 		
-		this.onChangeMonth = this.onChangeMonth.bind(this);
+		this.onChangeCategory = this.onChangeCategory.bind(this);
 		this.onChangeSort = this.onChangeSort.bind(this);
 		
         this.state = {
@@ -37,7 +37,7 @@ export default class TodosList extends Component {
     }
 	
 	componentDidMount() {		
-        axios.post('/expenses/month/Jan')
+        axios.post('/expenses/category/Food')
             .then(response => {
 				temp = response.data;
 				temp = sortBy(temp, ['description', 'amount']);
@@ -52,8 +52,8 @@ export default class TodosList extends Component {
             })
     }
 	
-	onChangeMonth(month) {
-        axios.post('expenses/month/'+month)
+	onChangeCategory(category) {
+        axios.post('expenses/category/'+category)
             .then(response => {
 				temp = response.data;
 				temp = sortBy(temp, ['description', 'amount']);
@@ -73,9 +73,9 @@ export default class TodosList extends Component {
 		temp = sortBy(temp, sortItem);
 		sum = sumBy(temp, 'amount');
 		this.setState({ 
-					expensesArray: temp,
-					total: sum
-				});
+			expensesArray: temp,
+			total: sum
+		});
     }
 
     listOfExpenses() {
@@ -93,18 +93,10 @@ export default class TodosList extends Component {
 				  <nav className="navbar navbar-expand-sm navbar-light bg-light">
 					<div className="collpase navbar-collapse">
 					  <ul className="navbar-nav mr-auto">
-						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Jan')}}>Jan</button>
-						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Feb')}}>Feb</button>
-						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Mar')}}>Mar</button>
-						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Apr')}}>Apr</button>
-						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('May')}}>May</button>
-						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Jun')}}>Jun</button>
-						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Jul')}}>Jul</button>
-						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Aug')}}>Aug</button>
-						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Sep')}}>Sep</button>
-						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Oct')}}>Oct</button>
-						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Nov')}}>Nov</button>
-						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeMonth('Dec')}}>Dec</button>
+						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeCategory('Food')}}>Food</button>
+						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeCategory('Bills')}}>Bills</button>
+						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeCategory('Entertainment')}}>Entertainment</button>
+						  <button type="submit" className="btn btn-priority" onClick={() => {this.onChangeCategory('Others/Misc.')}}>Others/Misc.</button>
 					  </ul>
 					</div>
 				  </nav>

@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import Select from 'react-select';
 import axios from 'axios';
 
+const optionsCategory = [
+  { value: 'Food', label: 'Food' },
+  { value: 'Bills', label: 'Bills' },
+  { value: 'Entertainment', label: 'Entertainment' },
+  { value: 'Other/Misc.', label: 'Other/Misc.' }
+];
+
 const optionsMonth = [
   { value: 'Jan', label: 'Jan' },
   { value: 'Feb', label: 'Feb' },
@@ -59,6 +66,7 @@ export default class CreateExpense extends Component {
 
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeAmount = this.onChangeAmount.bind(this);
+        this.onChangeCategory = this.onChangeCategory.bind(this);
 		this.onChangeMonth = this.onChangeMonth.bind(this);
 		this.onChangeDay = this.onChangeDay.bind(this);
 		this.onChangeYear = this.onChangeYear.bind(this);
@@ -68,6 +76,7 @@ export default class CreateExpense extends Component {
         this.state = {
             description: '',
             amount: '',
+            category: '',
             selectedMonth: '',
             selectedDay: '',
             year: '',
@@ -84,6 +93,12 @@ export default class CreateExpense extends Component {
     onChangeAmount(e) {
         this.setState({
             amount: e.target.value
+        });
+    }
+	
+	onChangeCategory(selectedCategory) {
+        this.setState({
+            category: selectedCategory.value
         });
     }
 	
@@ -118,6 +133,7 @@ export default class CreateExpense extends Component {
 			userId: "5c78ce86a484a23550339d6a",
             description: this.state.description,
             amount: this.state.amount,
+            category: this.state.category,
             month: this.state.month,
             day: this.state.day,
             year: this.state.year,
@@ -130,6 +146,7 @@ export default class CreateExpense extends Component {
 		this.setState = {
             description: '',
             amount: '',
+            category: '',
             month: '',
             day: '',
             year: '',
@@ -140,6 +157,7 @@ export default class CreateExpense extends Component {
     }
 
     render() {
+		const { selectedCategory } = this.state;
 		const { selectedMonth } = this.state;
 		const { selectedDay } = this.state;
 		
@@ -165,6 +183,16 @@ export default class CreateExpense extends Component {
 							/>
                     </div>
 					<div className="form-group">
+					  <label>Category: </label>
+					  <Select
+						name="Category"
+						placeholder={this.state.category}
+						value={selectedCategory}
+						options={optionsCategory}
+						onChange={this.onChangeCategory}
+					  />
+					</div>
+					<div className="form-group">
 					  <label>Month: </label>
 					  <Select
 						name="Month"
@@ -173,7 +201,7 @@ export default class CreateExpense extends Component {
 						options={optionsMonth}
 						onChange={this.onChangeMonth}
 					  />
-					</div>					
+					</div>
 					<div className="form-group">
 					  <label>Day: </label>
 					  <Select

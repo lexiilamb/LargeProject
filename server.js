@@ -180,6 +180,21 @@ expenseRoutes.post("/month/:newMonth", (req, res, next) => {
   });
 });
 
+// Route to return all expenses for a specific category
+expenseRoutes.post("/category/:newCategory", (req, res, next) => {
+  const userId = "5c78ce86a484a23550339d6a";
+  const category = req.params.newCategory;
+  console.log(category);
+  Expense.find({userId: userId, category: category}, function(err, expenses) {
+	console.log(expenses);
+	if (err) {
+		console.log(err);
+	} else {
+		res.json(expenses);
+	}
+  });
+});
+
 // Route to return all expenses with a specific group code
 expenseRoutes.post("/code/:thisCode", (req, res, next) => {
   const groupCode = req.params.thisCode;
