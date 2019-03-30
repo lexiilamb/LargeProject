@@ -114,9 +114,9 @@ export default class EditExpense extends Component {
         });
     }
 	
-	onChangeCategory(e) {
+	onChangeCategory(selectedCategory) {
         this.setState({
-            category: e.target.value
+            category: selectedCategory.value
         });
     }
 	
