@@ -76,7 +76,7 @@ export default class EditExpense extends Component {
     }
 
     componentDidMount() {
-        axios.get('/expenses/'+this.props.match.params.id)
+        axios.post('/expenses/'+this.props.match.params.id)
             .then(response => {
                 this.setState({
                     description: response.data.description,

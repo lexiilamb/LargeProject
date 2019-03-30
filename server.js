@@ -37,6 +37,7 @@ expenseRoutes.post("/all", (req, res, next) => {
 	}
   });
 });
+// For mobile testing
 expenseRoutes.post("/monthMobile/:newMonth", (req, res, next) => {
   const userId = "5c78ce86a484a23550339d6a";
   const month = req.params.newMonth;
@@ -194,7 +195,7 @@ expenseRoutes.post("/code/:thisCode", (req, res, next) => {
 });
 
 // Route to return specific expense in database.
-expenseRoutes.route('/:id').get(function(req, res) {
+expenseRoutes.route('/:id').post(function(req, res) {
     let id = req.params.id;
     Expense.findById(id, function(err, expense) {
         res.json(expense);
