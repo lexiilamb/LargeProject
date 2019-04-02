@@ -39,16 +39,32 @@ expenseRoutes.post("/all", (req, res, next) => {
 });
 // For mobile testing
 expenseRoutes.post("/monthMobile/:newMonth", (req, res, next) => {
-  const userId = "5c78ce86a484a23550339d6a";
+  const userId = req.body.userId;
   const month = req.params.newMonth;
   console.log(month);
   Expense.find({userId: userId, month: month}, function(err, expenses) {
-	console.log(expenses);
-	if (err) {
-		console.log(err);
-	} else {
-		res.json(expenses);
-	}
+    console.log(expenses);
+    if (err) {
+        console.log(err);
+    } else {
+        res.json(expenses);
+    }
+  });
+});
+
+// Mobile categories
+// Route to return all expenses for a specific category
+expenseRoutes.post("/categoryMobile/:newCategory", (req, res, next) => {
+  const userId = req.body.userId;
+  const category = req.params.newCategory;
+  console.log(category);
+  Expense.find({userId: userId, category: category}, function(err, expenses) {
+    console.log(expenses);
+    if (err) {
+        console.log(err);
+    } else {
+        res.json(expenses);
+    }
   });
 });
 // For mobile testing
